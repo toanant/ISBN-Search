@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ book.name }}{% endblock %}
+{% block content %}
+<table>
+  <tr><th>Name</th>
+  <td>{{ book.name }}</td></tr>
+  <tr><th>Description</th>
+  <td>{{ book.description }}<td></tr>
+  <tr><th>Publisher</th>
+  <td><a href="/publisher/{{ book['Publisher']}}/">{{ book["Publisher"] }}</a></td></tr>
+  <tr><th>Publication Year</th>
+  <td><a href="/year/{{ book['Publication Year']}}/">{{ book["Publication Year"] }}</a></td></tr>
+  <tr><th>Language</th>
+  <td>{{book["Language"]}}</td></tr>
+  <tr><th>ISBN-13</th>
+  <td>{{book["_id"]}}</td></tr>
+  <tr><th>ISBN-10</th>
+  <td>{{book["ISBN-10"]}}</td></tr>
+  <tr><th> No. of Pages</th>
+  <td>{{book['Number of Pages']}}</td></tr>
+  <tr><th>Binding</th>
+    <td>{{book["Binding"]}}</td></tr> <br><br>
+
+  <tr><th><a href="{{review['flipkart_url']}}/">Price on Flipkart</a></th>
+  <td>{{ review.flipkart }}</td></tr>
+  <tr><th><a href="{{review['Infibeam_url']}}/">Price on Infibeam</a></th>
+  <td>{{ review.Infibeam }}</td></tr>
+  <tr><th><a href="{{review['Bookadda_url']}}/">Price on Bookadda</a></th>
+  <td>{{ review.Bookadda }}</td></tr>
+ <tr><th><a href="{{review['Homeshop18_url']}}/">Price on Homeshop18 </a></th>
+  <td>{{ review.Homeshop18 }}</td></tr>
+ <tr><th><a href="{{review['Rediffbook_url']}}/">Price on Rediffbook</a></th>
+  <td>{{ review.Rediffbook }}</td></tr>
+ <tr><th><a href="{{review['Crossword_url']}}/">Price on Crossword</a></th>
+  <td>{{ review.Crossword }}</td></tr>
+
+
+
+
+</table>
+<script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
+<script type="text/javascript">
+GBS_insertPreviewButtonPopup('ISBN:{{book['_id']}}');
+</script>
+{% endblock %}

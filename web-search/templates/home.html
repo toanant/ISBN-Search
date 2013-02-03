@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Search your books{% endblock %}
+{% block content %}
+<form method="get" action="/search/">
+    <input type="text" name="isbn" placeholder="Enter your ISBN here">
+    <input type="submit" value="Submit">
+    </form>
+    <h3>Search your books using keywords</h3>
+    <form method="get" action="/search/">
+    <input type="text" name="keywords" placeholder="Enter your keywords here">
+    <input type="submit" value="Submit">
+    </form>
+{% endblock %}
