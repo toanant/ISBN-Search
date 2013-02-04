@@ -26,6 +26,12 @@ def detail(id):
     return render_template("details.html", book=book, review=review)
 
 
+@app.route("/author/<author_name>/")
+def author_page(author_name):
+    books = db.details.find({"author":
+                             re.compile(author_name, re.IGNORECASE)})
+    return render_template("results.html", books=books)
+
 @app.route("/publisher/<publisher_name>/")
 def publisher_page(publisher_name):
     books = db.details.find({"Publisher":
@@ -42,35 +48,34 @@ def year_page(year):
 
 @app.route("/search/", methods=["GET"])
 def search():
-    isbn = request.args.get("isbn")
-    keywords = request.args.get("keywords")
-    start = request.args.get("start")
-    limit = request.args.get("limit")
-    page = request.args.get("page")
-    pattern = re.compile(r"\d{13}")
-    if isbn:
-        start = 0
-        limit = 0
-        page = 0
-        isbn = pattern.search(isbn).group()
+	isbn = request.args.get("isbn", "")
+	keywords = request.args.get("keywords")
+	pattern_13 = re.compile(r"\d{13}")
+	pattern_10 = re.compile(r"\d{10}")
+	_started_at = datetime.now()
+	if isbn:
+ 		if pattern_13.search(isbn):
+			isbn = pattern_13.search(isbn).group()
+		else:
+			isbn = pattern_10.search(isbn).group()
         size = len(isbn)
         if size == 10:
             review = db.review.find({'ISBN-10': isbn})
             isbn = review['_id']
         else:
             review = db.review.find_one({'_id': isbn})
-
+	
         detail = db.details.find_one({'_id': isbn})
-
+	
         if detail:
             return render_template("details.html",
                                    book=detail, review=review)
-    else:
-        books = db.details.find({'keywords':
+	else:
+		books = db.details.find({'keywords':
                                  re.compile(keywords, re.IGNORECASE)})
-        return render_template("results.html", books=books)
-
-    return "Query can't be empty."
+		return render_template("results.html",books=books)
+	
+	return "Query can't be empty."
 
 if __name__ == "__main__":
-    app.run(debug=True)
+	app.run(debug=True)

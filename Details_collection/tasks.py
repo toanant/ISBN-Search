@@ -28,8 +28,7 @@ def get_detail(val):
     r = requests.get(url)
     if r.status_code == 200:
         vt = request.get(view_text_url)
-        vt = vt.json()
-        attrs['summary'] = r.json()["content"].decode("unicode_escape")
+        attrs['summary'] = vt.json()["content"].decode("unicode_escape")
               
         d = pq(r.text)
         fk["flipkart"] = d("meta[itemprop=\"price\"]").attr("content")
@@ -45,7 +44,7 @@ def get_detail(val):
         fk['flipkart_url'] = url
         attrs['image'] = d("#mprodimg-id").find("img").attr("data-src")
         attrs["name"] = d("h1[itemprop=\"name\"]").attr("title")
-        attrs["author"] = d("div[class=\"line nprod-specs\"] a").html()
+        attrs["author"] = d(".secondary-info > a").text()
         attrs["keywords"] =  d("meta[name=\"Keywords\"]").attr("content").split(",")
         td_set = d(".fk-specs-type2 > tr >td").items()
         for key in td_set:

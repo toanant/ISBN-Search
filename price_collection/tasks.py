@@ -71,11 +71,9 @@ def get_review(isbn):
 	if (d.get('Rediffbook') != None):
 		try:
 			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text().split()[2]
-		except IndexError:
-			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text()
-		except AttributeError:
+		except (IndexError, AttributeError),e:
 			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text()
 	else:
 		attrs['Rediffbook'] = 'None'
 	
-	Review.update({'_id':isbn},{$set:{'Rediffbook':attrs['Rediffbook'], 'Rediffbook_url':attrs['Rediffbook_url'], 'Infibeam':attrs['Infibeam'], 'Infibeam_url':attrs['Infibeam_url'], 'Bookadda':attrs['Bookadda'], 'Bookadda_url':attrs['Bookadda_url'], 'Crossword':attrs['Crossword'], 'Crossword_url':attrs['Crossword_url'], 'Homeshop18':attrs['Homeshop18'], 'Homeshop18_url':attrs['Homeshop18_url'], 'date':attrs['date']}})
+	Review.update({'_id':isbn},{'$set':{'Rediffbook':attrs['Rediffbook'], 'Rediffbook_url':attrs['Rediffbook_url'], 'Infibeam':attrs['Infibeam'], 'Infibeam_url':attrs['Infibeam_url'], 'Bookadda':attrs['Bookadda'], 'Bookadda_url':attrs['Bookadda_url'], 'Crossword':attrs['Crossword'], 'Crossword_url':attrs['Crossword_url'], 'Homeshop18':attrs['Homeshop18'], 'Homeshop18_url':attrs['Homeshop18_url'], 'date':attrs['date']}})

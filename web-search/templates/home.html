@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Search your books{% endblock %}
 {% block content %}
-<form method="get" action="/search/">
-    <input type="text" name="isbn" placeholder="Enter your ISBN here">
-    <input type="submit" value="Submit">
-    </form>
+    <h3>Search books using ISBN Number</h3>
+   	<form method="get" action="/search/" class="form-search">
+    <input type="text" name="isbn" placeholder="Enter your ISBN here" class="input-medium search-query">
+    <input type="submit" value="submit"class="btn btn-success"></button>
+	</form>
     <h3>Search your books using keywords</h3>
-    <form method="get" action="/search/">
-    <input type="text" name="keywords" placeholder="Enter your keywords here">
-    <input type="submit" value="Submit">
+	<form method="get" action="/search/" class="form-search">
+    <input type="text" name="keywords" placeholder="Enter your keywords here" class="input-medium search-query">
+	 <input type="submit" value="submit" class="btn btn-success"></button>
     </form>
 {% endblock %}

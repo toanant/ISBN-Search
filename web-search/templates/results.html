@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Search your books{% endblock %}
 {% block content %}
-{% for b in books %}
-<a href="/books/{{ b._id }}">{{ b.name }}</a><br>
-{% endfor %}
+<ol>{% for b in books %}
+<li><a href="/books/{{ b._id }}">{{ b.name }}</a><br></li>
+{% endfor %}</ol>
 {% endblock %}

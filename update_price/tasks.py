@@ -4,7 +4,6 @@ import requests
 from pyquery import PyQuery as pq
 from lxml import etree
 import datetime
-# from flipkart_settings import *
 from web_setting import *
 from celery import Celery
 
@@ -37,11 +36,11 @@ def update_review(isbn):
 		attrs["flipkart"] = fk("meta[itemprop=\"price\"]").attr("content")
 		try:
 			attrs["ratingValue"] = float(fk("meta[itemprop=\"ratingValue\"]").attr("content"))
-		except TypeError:
+		except (TypeError, ValueError), e:
 			attrs["ratingValue"] = 'Not Rated'
 		try:
 			attrs["ratingCount"] = int(fk("span[itemprop=\"ratingCount\"]").text())
-		except TypeError:
+		except (TypeError, ValueError), e:
 			attrs["ratingCount"] = 'None'
 
 	attrs['_id'] = isbn
