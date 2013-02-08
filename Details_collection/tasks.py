@@ -17,16 +17,17 @@ Details = db.Details
 Review = db.Review
 @celery.task
 def get_detail(val):
-    detail = {}    
-    l = []
-    attrs = {}
+	detail = {}    
+	l = []
+	proxy = {'socks4':'127.0.0.1:9050'}
+	attrs = {}
     ## fk represent attributes related to flipkart review collection
-    fk = {}
-    base_url = 'http://www.flipkart.com/search.php?query='
-    url = base_url + val
+	fk = {}
+	base_url = 'http://www.flipkart.com/search.php?query='
+	url = base_url + val
    ## view_text_url = 'http://viewtext.org/api/text?url=%s&format=json'%(url)
-    r = requests.get(url)
-    if r.status_code == 200:
+	r = requests.get(url, proxies=proxy)
+	if r.status_code == 200:
        ## vt = request.get(view_text_url)
 		
 		d = pq(r.text)		

@@ -24,12 +24,12 @@ def update_review(isbn):
 	attrs = {}
 	d = {}
 	old = Review.find_one({'_id':isbn})
-	
+	proxy = {'socks4':'127.0.0.1:9050'}	
 	for key, value in urlset.items():
 		t_url = value + isbn
 		key_url = key + '_url'
 		attrs[key_url] = t_url
-		r = requests.get(t_url)	
+		r = requests.get(t_url, proxies=proxy)	
 		if r.status_code == 200:
 			d[key] = pq(r.text)	
 

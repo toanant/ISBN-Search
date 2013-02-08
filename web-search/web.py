@@ -22,14 +22,14 @@ def home():
 
 @app.route("/books/<id>/")
 def detail(id):
-    book = db.details.find_one({"_id": id})
-    review = db.review.find_one({"_id": id})
+    book = db.Details.find_one({"_id": id})
+    review = db.Review.find_one({"_id": id})
     return render_template("details.html", book=book, review=review)
 
 
 @app.route("/author/<author_name>/")
 def author_page(author_name):
-    books = db.details.find({"author":
+    books = db.Details.find({"author":
                              re.compile(author_name, re.IGNORECASE)})
     return render_template("results.html", books=books)
 
@@ -37,26 +37,26 @@ def author_page(author_name):
 def publisher_page(publisher_name):
 	publisher_name = str(publisher_name)
 	publisher_name = publisher_name.replace('/',' ')
-	books = db.details.find({"Publisher":
+	books = db.Details.find({"Publisher":
                              re.compile(publisher_name, re.IGNORECASE)})
 	return render_template("results.html", books=books)
 
 
 @app.route("/year/<year>/")
 def year_page(year):
-    books = db.details.find({"Publication Year":
+    books = db.Details.find({"Publication Year":
                              re.compile(year, re.IGNORECASE)})
     return render_template("results.html", books=books)
 
 
 @app.route("/search/", methods=["GET"])
 def search():
-	isbn = request.args.get("isbn", "")
+	isbn = request.args.get("isbn")
 	keywords = request.args.get("keywords")
 	pattern_13 = re.compile(r"\d{13}")
 	_started_at = datetime.now()
 	if isbn:
- 		if pattern_13.search(isbn):
+		if pattern_13.search(isbn):
 			isbn = pattern_13.search(isbn).group()
 			if(is_isbn13(isbn)):
 				isbn = isbn
@@ -69,24 +69,27 @@ def search():
 				return render_template('Error.html')
 		size = len(isbn)
 		if size == 10:
-			detail = db.details.find_one({'ISBN-10':isbn})
+			detail = db.Details.find_one({'ISBN-10':isbn})
 			isbn = detail.get('_id')
 		else:
-			detail = db.details.find_one({'_id': isbn})
-		review = db.review.find_one({'_id': isbn})
+			detail = db.Details.find_one({'_id': isbn})
+		review = db.Review.find_one({'_id': isbn})
 		if detail:
 			return render_template("details.html",
                                    book=detail, review=review)
 		else: 
 			return render_template("Error.html")
-	else:
-		books = db.details.find({'keywords':re.compile(keywords, re.IGNORECASE)})
-		if (books.count() != 0):
-			return render_template("results.html",books=books)
-		else:
+	elif keywords:
+		if len(keywords) == 0:
 			return render_template("Error.html")
-	return "Query can't be empty."
-
+		else:
+			books = db.Details.find({'keywords':re.compile(keywords, re.IGNORECASE)})
+			if (books.count() != 0):
+				return render_template("results.html",books=books)
+			else:
+				return render_template("Error.html")
+	else:
+		return " You must enter the query"
 if __name__ == "__main__":
 	app.run(debug=True)
 

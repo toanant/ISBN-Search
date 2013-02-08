@@ -2,8 +2,10 @@
 {% block title %}Search your books{% endblock %}
 {% block content %}
 {% if books.count() != 0 %}
-<ol>{% for b in books %}
+<ol id='navigation'>{% for b in books %}
+{% if b.author %}
 <li><a href="/books/{{ b.get('_id') }}">{{ b.get('name') }}</a><br></li>
+{% endif %}
 {% endfor %}</ol>
 {% else %} Page Not Found !!!
 {% endif %}
