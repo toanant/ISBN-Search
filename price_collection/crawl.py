@@ -1,7 +1,7 @@
 from tasks import *
 
 def crawl():
-	cursor = review.find({'Bookadda':{'$exists':0}})
+	cursor = Review.find({'Bookadda':{'$exists':0}})
 	size = cursor.count()
 	i = 0
 	while(i < size):

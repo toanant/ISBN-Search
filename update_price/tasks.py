@@ -27,10 +27,10 @@ def update_review(isbn):
 	
 	for key, value in urlset.items():
 		t_url = value + isbn
+		key_url = key + '_url'
+		attrs[key_url] = t_url
 		r = requests.get(t_url)	
 		if r.status_code == 200:
-			key_url = key + '_url'
-			attrs[key_url] = t_url
 			d[key] = pq(r.text)	
 
 
