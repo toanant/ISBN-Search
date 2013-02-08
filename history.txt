@@ -1,0 +1,309 @@
+aptitude search zsh
+sudo ln -s /usr/lib/zsh /lib
+$ZSH
+source ~/.zshrc
+ln -s ~/.zsh/zshenv ~/.zshenv
+ez
+sz
+cd product-search
+cd ~/product-search
+ls ~/.z
+cat ~/.z
+z product
+git log
+sudo aptitude install awesome
+ls 
+sudo df-h
+sudo df -h
+cd /media
+cat .bashrc
+cat .bash_history
+vim ~/.zshrc
+sudo poweroff
+cat /etc/apt/sources.list
+sudo aptitude safe-upgrade
+vim .zshrc
+sudo dpkg-reconfigure locales
+sudo locale-gen --purge --no-archive
+sudo update-locale LANG=en_US.UTF-8
+uname -a
+cd web-server/\
+: 1358578452:0;cd web-server
+cd /media/
+cd /mnt
+ls -l
+z /home/mahesh/product-search
+mkdir ISBN
+git pull origin origin/ISBN
+git pull origin origin/ISBN:ISBN
+git fetch origin
+cd ISBN
+git fetch ISBN
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+cd /etc/apt/sources.list.d
+vim 10gen.list
+sudo vim 10gen.list
+pi mongodb-10gen
+z /home/mahesh/product-search/ISBN
+git checkout --track origin/ISBN
+git fetch
+git pull
+sudo service mongodb restart
+z /home/mahesh/product-search/bk_utils 
+java
+pi ipython
+sudo aptitude -upgrade
+pip freeze
+pip freeze > required.txt
+python urls.py
+vim urls.py
+cp urls.py /home/mahesh
+mv urls.py tasks.py
+mv tasks.py temp_tasks.py
+python
+traceroute6 google.com
+pi gimp
+z /home/mahesh/product-search/web-server
+sudo service elasticsearch restart
+cd utils
+z /home/mahesh/product-search/utils
+cd web-server
+mongo <school_collection.js
+vim school_collection.js
+mongo < school_collection.js
+cd lesson_files
+python using_find.py
+python find_using_gt_lt.py
+python read_reddit.py
+cat using_regex.py
+vim using_regex.py
+python using_regex.py
+python using_dot_notation.py
+python using_insert.py
+python using_update.py
+python using_find_and_modify.py
+pu
+cat ~/.zshrc
+cd Hindi
+rm *.pdf
+mv grades.ef42a2b3e7ff.js grades.js
+mongoimport -d students -c grades < grades.js
+cd Downloads/lesson_files
+python set2.py
+sudo pip install bottle
+cd hw2.3.076c9b232fa8
+python blog.py
+python validate.py
+rm isbn_list.pyc
+mkdir isbn-search
+mkdir isbn_collection
+mkdir Details_collection
+mkdir price_collection
+mkdir update_price
+mv isbn_list.py tasks.py isbn_collection
+git init
+cd Downloads
+sudo dpkg -i google-talkplugin_current_amd64.deb
+python details.py
+vim details.py
+mv details.py tasks.py
+z /home/mahesh/isbn-search/Details_collection
+cp /home/mahesh/product-search/bk_utils/ 
+cp /home/mahesh/product-search/bk_utils/*  
+cp /home/mahesh/product-search/bk_utils
+cp /home/mahesh/product-search/bk_utils col
+cp -r /home/mahesh/product-search/bk_utils col
+cat urls.py
+rm *
+cp /home/mahesh/isbn-search/Details_collection/crawl.py 
+cp /home/mahesh/isbn-search/Details_collection/crawl.py crawl.py
+vim price.py
+mv price.py tasks.py
+cat .zshrc
+htop
+kill 5935
+top
+kill 6171
+pug
+sudo aptitude update
+sudo apt-get update
+cd .git
+clear
+mongod
+rm crawl.pyc
+python tasks.py
+cat isbn_list.py
+python isbn_list.py
+vim isbn_list.py
+mv temp_tasks.py tasks.py
+z /home/mahesh/product-search/bk_utils
+z /home/mahesh/isbn-search/
+cd /etc/vim
+gedit vimrc
+sudo vim vimrc
+cd ~/isbn-search/update_price
+sudo pip install Flask-PyMongo
+d ..
+vim isbn.py
+z /home/mahesh/isbn-search/update_price
+z /home/mahesh/isbn-search/price_collection
+ls -a
+pud
+sudo apt-get upgrade
+cp web_setting.py ~/isbn-search/Details_collection
+cp web_setting.py ~/isbn-search/isbn_collection
+vim craw
+cd isb
+cd isbn-search/isbn_collection
+mv crawl.py old_crawl.py
+vim ntask.py
+source venv/bin/activate
+z /home/mahesh/isbn-search/isbn_collection
+mv tasks.py old_tasks.py
+mv ntask.py tasks.py
+celery -A tasks worker --loglevel=info --concurrency = 2
+rm tasks.pyc
+python crawl.py
+celery -A tasks worker --loglevel=info --concurrency=2
+mongo 
+git add .gitignore
+git commit -am 'Intial files commits'
+vim hello.html
+nano hello.html
+sudo pip install html2text
+sudo pip install Pattern
+cd isbn_collection
+mongoexport --help
+mongoexport -d abhi -c --all -f --all --out abhi.json
+mongoexport -d abhi -c  -f --all --out abhi.json
+rm abhi.json
+cp -r isbn-search /media/mahesh/ABHI
+mongodump
+ls dump
+cp -r dump /media/mahesh/ABHI
+ls /media/mahesh/ABHI
+ls /media/mahesh/ABHI/dump
+zip -r dump.zip dump
+ll dump.zip
+sudo ifconfig
+sudo aptitude search ssh
+sudo aptitude install ssh-server
+sudo aptitude install openssh-server
+unzip web-search.zip
+cat results.html
+rm -r dump
+git rm dump/
+git rm -r dump
+vim isbn.html
+rm isbn.html
+vim home.html
+git rm isbn.html
+git commit -am 'Frontend web.py & templates are added to work over queries in browser'
+git --help
+git show
+cd update_price
+vim crawl.py
+vim web_setting.py
+cat web_setting.py
+git remote add origin git@github.com:toanant/ISBN-Search.git
+git origin
+git remote
+git config --list
+git push -u origin master
+apt-get install libapache2-mod-wsgi
+sudo apt-get install libapache2-mod-wsgi
+netstat -tulpn
+netstat -tulpn | grep :80
+fuser 80/tcp
+lsof -i :80
+grep 80 /etc/services
+reboot
+sudo aptitude purge lighttpd
+cd.
+cd price
+mongo
+cd Details_collection
+vim results.html
+..
+vim web.py
+cd price_collection
+vim tasks.py
+cd
+cd isbn-search
+ping google.com
+sudo ln -s ~/isbn-search/web-search ~/isbn_search
+cd isbn-search/web-search
+less isbn_search.wsgi
+ls
+sudo vim /etc/apache2/sites-enabled/000-default
+sudo ln -s /etc/apache2/sites-available/isbn /etc/apache2/sites-enabled
+sudo vim /etc/hosts
+sudo rm /etc/apache2/sites-enabled/000-default
+sudo tell /var/log/apache2/error.log
+sudo mv ~/isbn_search /var/www
+sudo vim /etc/apache2/sites-available/isbn
+sudo service apache2 restart
+sudo tail -n 50 /var/log/apache2/error.log
+vim isbn_search.wsgi
+ipython
+vim models.py
+sudo pip install -U mongoengine
+cd isbn-search/update_price
+cat tasks.py
+cat crawl.py
+crontab -e
+set
+echo $HOME
+echo '$HOME'
+echo "$HOME"
+sudo aptitude install tor
+sudo aptitude install proxychains
+sudo gedit /etc/proxychains.conf
+proxychains ping google.com
+torsocks curl wtfmyip.com/json
+tor -version
+torsocks ping google.com
+sudo gedit /usr/bin/proxychains
+torsocks curl wtfwhatismyip.com/json
+pi curlftpfs l
+pi curl
+pi tsocks
+t = torsocks curl 'http://wtfismyip.com/json'
+$t = torsocks curl 'http://wtfismyip.com/json'
+$t = $(torsocks curl 'http://wtfismyip.com/json')
+$t=$(torsocks curl 'http://wtfismyip.com/json')
+echo $t
+echo $(torsocks curl 'http://wtfismyip.com/json')
+var=$(torsocks curl 'http://wtfismyip.com/json')
+var
+echo '$var'
+echo $var
+sudo gedit /etc/tor/torrc
+sudo service tor restart
+torsocks curl 'http://wtfismyip.com/json'
+pi screen
+python web.py
+vim templates/results.html
+vim sample.html
+vim templates/home.html
+cd web-search
+cat web.py
+vim templates/base.html
+cat web.pycd templates
+vim templates/details.html
+vim base.html
+cd templates
+vim details.html
+git add *
+git status
+git commit -am 'css-style are applied to html-pages & flask is configured to use apache service as a server'
+exit
+cd ..
+git push
+cat .histfile
+halt
+: 1359997197:0;z /home/mahesh/isbn-search
+: 1359997228:0;mongo
+: 1359997285:0;cat .histfile
+: 1359997294:0;cat ~/.histfile
+: 1359997879:0;cat ~/.histfile > history.txt

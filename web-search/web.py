@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 from pymongo import MongoClient
 from flask.ext.paginate import Pagination
+from check_isbn import *
 # from pyelasticsearch import ElasticSearch
 
 
@@ -34,9 +35,11 @@ def author_page(author_name):
 
 @app.route("/publisher/<publisher_name>/")
 def publisher_page(publisher_name):
-    books = db.details.find({"Publisher":
+	publisher_name = str(publisher_name)
+	publisher_name = publisher_name.replace('/',' ')
+	books = db.details.find({"Publisher":
                              re.compile(publisher_name, re.IGNORECASE)})
-    return render_template("results.html", books=books)
+	return render_template("results.html", books=books)
 
 
 @app.route("/year/<year>/")
@@ -51,31 +54,39 @@ def search():
 	isbn = request.args.get("isbn", "")
 	keywords = request.args.get("keywords")
 	pattern_13 = re.compile(r"\d{13}")
-	pattern_10 = re.compile(r"\d{10}")
 	_started_at = datetime.now()
 	if isbn:
  		if pattern_13.search(isbn):
 			isbn = pattern_13.search(isbn).group()
+			if(is_isbn13(isbn)):
+				isbn = isbn
+			else:
+				return render_template('Error.html')
 		else:
-			isbn = pattern_10.search(isbn).group()
-        size = len(isbn)
-        if size == 10:
-            review = db.review.find({'ISBN-10': isbn})
-            isbn = review['_id']
-        else:
-            review = db.review.find_one({'_id': isbn})
-	
-        detail = db.details.find_one({'_id': isbn})
-	
-        if detail:
-            return render_template("details.html",
+			if(is_isbn10(isbn)):
+				isbn = isbn
+			else:
+				return render_template('Error.html')
+		size = len(isbn)
+		if size == 10:
+			detail = db.details.find_one({'ISBN-10':isbn})
+			isbn = detail.get('_id')
+		else:
+			detail = db.details.find_one({'_id': isbn})
+		review = db.review.find_one({'_id': isbn})
+		if detail:
+			return render_template("details.html",
                                    book=detail, review=review)
+		else: 
+			return render_template("Error.html")
 	else:
-		books = db.details.find({'keywords':
-                                 re.compile(keywords, re.IGNORECASE)})
-		return render_template("results.html",books=books)
-	
+		books = db.details.find({'keywords':re.compile(keywords, re.IGNORECASE)})
+		if (books.count() != 0):
+			return render_template("results.html",books=books)
+		else:
+			return render_template("Error.html")
 	return "Query can't be empty."
 
 if __name__ == "__main__":
 	app.run(debug=True)
+

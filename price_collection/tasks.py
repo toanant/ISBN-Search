@@ -27,6 +27,7 @@ def get_review(isbn):
 	attrs['date'] = datetime.datetime.utcnow()
 	for key, value in urlset.items():
 		t_url = value + isbn
+		print t_url
 		r = requests.get(t_url)	
 		if r.status_code == 200:
 			key_url = key + '_url'
@@ -77,3 +78,4 @@ def get_review(isbn):
 		attrs['Rediffbook'] = 'None'
 	
 	Review.update({'_id':isbn},{'$set':{'Rediffbook':attrs['Rediffbook'], 'Rediffbook_url':attrs['Rediffbook_url'], 'Infibeam':attrs['Infibeam'], 'Infibeam_url':attrs['Infibeam_url'], 'Bookadda':attrs['Bookadda'], 'Bookadda_url':attrs['Bookadda_url'], 'Crossword':attrs['Crossword'], 'Crossword_url':attrs['Crossword_url'], 'Homeshop18':attrs['Homeshop18'], 'Homeshop18_url':attrs['Homeshop18_url'], 'date':attrs['date']}})
+

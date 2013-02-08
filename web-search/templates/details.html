@@ -2,53 +2,65 @@
 {% block title %}{{ book.name }}{% endblock %}
 {% block content %}
 <div class="container-fluid">
-<div class="row-fluid">
-<div class="span4">
-<img src="{{ book['image']}}" alt="No preview available" class="img-polaroid">
-<table class="table table-condensed">
-<tr><th><a href="{{review['flipkart_url']}}/">Price on Flipkart</a></th>
-<td>{{ review.flipkart }}</td></tr>
-<tr><th><a href="{{review['Infibeam_url']}}/">Price on Infibeam</a></th>
-<td>{{ review.Infibeam }}</td></tr>
-<tr><th><a href="{{review['Bookadda_url']}}/">Price on Bookadda</a></th>
-<td>{{ review.Bookadda }}</td></tr>
-<tr><th><a href="{{review['Homeshop18_url']}}/">Price on Homeshop18 </a></th>
-<td>{{ review.Homeshop18 }}</td></tr>
-<tr><th><a href="{{review['Rediffbook_url']}}/">Price on Rediffbook</a></th>
-<td>{{ review.Rediffbook }}</td></tr>
-<tr><th><a href="{{review['Crossword_url']}}/">Price on Crossword</a></th>
-<td>{{ review.Crossword }}</td></tr>
-<br>
-<script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
-<script type="text/javascript">
-GBS_insertPreviewButtonPopup('ISBN:{{book['ISBN-10']}}');
-</script></table>
-</div>
-<div class="span8">
- <table class="table table-condensed">
-  <tr><th>Author</th>
-  <td><a href="/author/{{ book.author}}/">{{ book["author"] }}</a></td></tr>
-
-  <tr><th>Publisher</th>
-  <td><a href="/publisher/{{ book['Publisher']}}/">{{ book["Publisher"] }}</a></td></tr>
-  <tr><th>Publication Year</th>
-  <td><a href="/year/{{ book['Publication Year']}}/">{{ book["Publication Year"] }}</a></td></tr>
-  <tr><th>Language</th>
-  <td>{{book["Language"]}}</td></tr>
-  <tr><th>ISBN-13</th>
-  <td>{{book["_id"]}}</td></tr>
-  <tr><th>ISBN-10</th>
-  <td>{{book["ISBN-10"]}}</td></tr>
-  <tr><th> No. of Pages</th>
-  <td>{{book['Number of Pages']}}</td></tr>
-  <tr><th>Binding</th>
-    <td>{{book["Binding"]}}</td></tr>
-</table>
-</div>
-</div>
-</div>
-  <div class="container">
- <h3>  Description: </h3>
-<p class="text-success">{{ book.summary | safe }}</p>
-</div>
+  <div class="row-fluid">
+   <div class="span10">
+      <div class="row-fluid">
+        <div class="span5">
+          <table class="table table-condensed">
+            <tr><th>Author</th>
+              <td><a href="/author/{{ book.author}}/">{{ book.get("author") }}</a></td></tr>
+            <tr><th>Publisher</th>
+              <td><a href="/publisher/{{ book['Publisher']}}/">{{ book.get("Publisher") }}</a></td></tr>
+            <tr><th>Publication Year</th>
+              <td><a href="/year/{{ book['Publication Year']}}/">{{ book.get("Publication Year") }}</a></td></tr>
+            <tr><th>Language</th>
+              <td>{{book.get("Language")}}</td></tr>
+            <tr><th>ISBN-13</th>
+              <td>{{book.get("_id")}}</td></tr>
+            <tr><th>ISBN-10</th>
+              <td>{{book.get("ISBN-10")}}</td></tr>
+            <tr><th> No. of Pages</th>
+              <td>{{book.get('Number of Pages')}}</td></tr>
+            <tr><th>Binding</th>
+              <td>{{book.get("Binding")}}</td></tr>
+          </table></div>
+        <div class="span5">
+          <table class="table table-condensed">
+            <tr><th>Price on Flipkart</th>
+              <td>{{ review.get('flipkart') }}</td>
+              <td>{% if review.get('flipkart') %}<a href="{{ review.get('flipkart_url') }}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+            <tr><th>Price on Infibeam</th>
+              <td>{{ review.get('Infibeam') }}</td>
+              <td>{% if review.get('Infibeam') %} <a href="{{review.get('Infibeam_url') }}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+            <tr><th>Price on Bookadda</th>
+              <td>{{ review.get('Bookadda') }}</td>
+              <td>{% if review.get('Bookadda') %} <a href="{{ review.get('Bookadda_url') }}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+            <tr><th>Price on Homeshop18 </th>
+                <td>{{ review.get('Homeshop18') }}</td>
+                <td>{% if review.get('Homeshop18') %} <a href="{{review.get('Homeshop18_url')}}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+            <tr><th>Price on Rediffbook</th>
+               <td>{{ review.get('Rediffbook') }}</td>
+               <td>{% if review.get('Rediffbook') %}<a href="{{ review.get('Rediffbook_url') }}"><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
+            <tr><th>Price on Crossword</th>
+              <td>{{ review.get('Crossword') }}</td>
+              <td>{% if review.get('Crossword') %}<a href="{{ review.get('Crossword_url') }}"><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
+              <tr></tr>
+              <tr><th>Rating </th>
+          <td>{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
+          </table></div>
+        </div>
+    <div class="container">
+  <h3>  Description: </h3>
+  <p class="text-success">{{ book.get('summary') | safe }}</p>
+   </div>
+  </div>
+  <div class="span2">
+      <img src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br>
+      <script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
+      <script type="text/javascript">
+        GBS_insertPreviewButtonPopup('ISBN:{{book.get('ISBN-10')}}');
+      </script>
+    </div>
+    </div>
+  </div>
 {% endblock %}

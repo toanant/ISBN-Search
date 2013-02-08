@@ -1,14 +1,15 @@
 from tasks import *
 
 def crawl():
-	size = Review.count()
+	cursor = review.find({'Bookadda':{'$exists':0}})
+	size = cursor.count()
 	i = 0
 	while(i < size):
-		rev = Review.find()[i]
+		rev = cursor[i]
 		u = str(rev['_id'])
 		get_review.delay(u)
-		print size
-		size += 1
+		print i
+		i += 1
                 
 
 crawl()

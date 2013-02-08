@@ -24,13 +24,17 @@ def get_detail(val):
     fk = {}
     base_url = 'http://www.flipkart.com/search.php?query='
     url = base_url + val
-    view_text_url = 'http://viewtext.org/api/text?url=%s&format=json'%(url)
+   ## view_text_url = 'http://viewtext.org/api/text?url=%s&format=json'%(url)
     r = requests.get(url)
     if r.status_code == 200:
-        vt = request.get(view_text_url)
-        attrs['summary'] = vt.json()["content"].decode("unicode_escape")
-              
-        d = pq(r.text)
+       ## vt = request.get(view_text_url)
+	
+		d = pq(r.text)		
+       	summary =  d('div[id="description"]').html()
+		if(summary != None):
+			attrs['summary'] = summary
+		else:
+			attrs['summary'] = 'Not Available at the time. !!!'
         fk["flipkart"] = d("meta[itemprop=\"price\"]").attr("content")
         try:
             fk["ratingValue"] = float(d("meta[itemprop=\"ratingValue\"]").attr("content"))
@@ -42,7 +46,11 @@ def get_detail(val):
                 fk["ratingCount"] = 'None'
         fk['_id'] = val
         fk['flipkart_url'] = url
-        attrs['image'] = d("#mprodimg-id").find("img").attr("data-src")
+		if(d("#mprodimg-id").find("img").attr("data-src") != None):
+			attrs['image'] = d("#mprodimg-id").find("img").attr("data-src")
+		else:
+			attrs['image'] = d('.image-wrapper > img').attr('src')
+
         attrs["name"] = d("h1[itemprop=\"name\"]").attr("title")
         attrs["author"] = d(".secondary-info > a").text()
         attrs["keywords"] =  d("meta[name=\"Keywords\"]").attr("content").split(",")

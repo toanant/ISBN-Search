@@ -23,6 +23,8 @@ Review= db.Review
 def update_review(isbn):
 	attrs = {}
 	d = {}
+	old = Review.find_one({'_id':isbn})
+	
 	for key, value in urlset.items():
 		t_url = value + isbn
 		r = requests.get(t_url)	
@@ -30,6 +32,8 @@ def update_review(isbn):
 			key_url = key + '_url'
 			attrs[key_url] = t_url
 			d[key] = pq(r.text)	
+
+
 ## for flipkart website
 	if (d.get('flipkart') != None):
 		fk = d.get('flipkart')
@@ -42,7 +46,12 @@ def update_review(isbn):
 			attrs["ratingCount"] = int(fk("span[itemprop=\"ratingCount\"]").text())
 		except (TypeError, ValueError), e:
 			attrs["ratingCount"] = 'None'
-
+	
+	else:
+		attrs['flipkart'] = old['flipkart']
+		attrs['ratingValue'] = old['ratingValue']
+		attrs['ratingCount'] = old['ratingCount']	
+		
 	attrs['_id'] = isbn
 	attrs['date'] = datetime.datetime.utcnow()
 	
@@ -51,7 +60,7 @@ def update_review(isbn):
 		Ib = d.get('Infibeam')
 		attrs['Infibeam'] = Ib("span[class=\"infiPrice amount price\"]").text()
 	else:
-		attrs['Infibeam'] = 'None'
+		attrs['Infibeam'] = old['Infibeam']
 
 ## for Crossword website Price
 	if (d.get('Crossword') != None):
@@ -60,7 +69,7 @@ def update_review(isbn):
 		except AttributeError:
 			attrs['Crossword'] = d.get('Crossword')("span[class=\"variant-final-price\"]").text()
 	else:
-		attrs['Crossword'] = 'None'
+		attrs['Crossword']	= old['Crossword']
 
 ## for Homeshop18 website Price
 	if (d.get('Homeshop18') != None):
@@ -69,7 +78,7 @@ def update_review(isbn):
 		except AttributeError:
 			attrs['Homeshop18'] = d.get('Homeshop18')("span[class=\"pdp_details_hs18Price\"]").text()
 	else:
-		attrs['Homeshop18'] = 'None'
+		attrs['Homeshop18'] = old['Homeshop18']
 
 ## for Bookadda website Price
 	if (d.get('Bookadda') != None):
@@ -79,17 +88,15 @@ def update_review(isbn):
 			attrs['Bookadda'] = d.get('Bookadda')("span[class=\"actlprc\"]").text()
 
 	else:
-		attrs['Bookadda'] = 'None'
+		attrs['Bookadda'] = old['Bookadda']
 ## for rediff book website
 	if (d.get('Rediffbook') != None):
 		try:
 			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text().split()[2]
-		except IndexError:
-			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text()
-		except AttributeError:
+		except (IndexError, AttributeError), e:
 			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text()
 	else:
-		attrs['Rediffbook'] = 'None'
+		attrs['Rediffbook'] = old['Rediffbook']
 
-	review.save(attrs)
+	Review.save(attrs)
 

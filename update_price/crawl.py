@@ -11,8 +11,8 @@ def crawl():
 		if ((now - past) > timedelta(hours = 84)):
 			update_review.delay(u)
 		
-		print size
-		size -= 1
+		print i
+		i -= 1
                 
 
 crawl()
