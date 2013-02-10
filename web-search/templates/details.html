@@ -8,11 +8,14 @@
         <div class="span5">
           <table class="table table-condensed">
             <tr><th>Author</th>
-              <td><a href="/author/{{ book.author}}/">{{ book.get("author") }}</a></td></tr>
+				<td>{{ book.get("author") }}</td>
+				<td><a href="/author/{{ book.author.replace('/', ' ') }}/"><span class="badge badge-success">Search</span></a></td></tr>
             <tr><th>Publisher</th>
-              <td><a href="/publisher/{{ book['Publisher']}}/">{{ book.get("Publisher") }}</a></td></tr>
+				<td>{{ book.get("Publisher") }}</td>
+				<td><a href="/publisher/{{ book['Publisher'].replace('/', ' ')}}/"><span class="badge badge-success">Search</span></a></td></tr>
             <tr><th>Publication Year</th>
-              <td><a href="/year/{{ book['Publication Year']}}/">{{ book.get("Publication Year") }}</a></td></tr>
+				<td>{{ book.get("Publication Year") }}</td>
+				<td><a href="/year/{{ book['Publication Year'].replace('/', ' ')}}/"><span class="badge badge-success">Search</span></a></td></tr>
             <tr><th>Language</th>
               <td>{{book.get("Language")}}</td></tr>
             <tr><th>ISBN-13</th>
@@ -28,24 +31,24 @@
           <table class="table table-condensed">
             <tr><th>Price on Flipkart</th>
               <td>{{ review.get('flipkart') }}</td>
-              <td>{% if review.get('flipkart') %}<a href="{{ review.get('flipkart_url') }}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+              <td>{% if review.get('flipkart') %}<a href="{{ review.get('flipkart_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr><th>Price on Infibeam</th>
               <td>{{ review.get('Infibeam') }}</td>
-              <td>{% if review.get('Infibeam') %} <a href="{{review.get('Infibeam_url') }}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+              <td>{% if review.get('Infibeam') %} <a href="{{review.get('Infibeam_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr><th>Price on Bookadda</th>
               <td>{{ review.get('Bookadda') }}</td>
-              <td>{% if review.get('Bookadda') %} <a href="{{ review.get('Bookadda_url') }}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+              <td>{% if review.get('Bookadda') %} <a href="{{ review.get('Bookadda_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr><th>Price on Homeshop18 </th>
                 <td>{{ review.get('Homeshop18') }}</td>
-                <td>{% if review.get('Homeshop18') %} <a href="{{review.get('Homeshop18_url')}}"> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
+                <td>{% if review.get('Homeshop18') %} <a href="{{review.get('Homeshop18_url')}}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr><th>Price on Rediffbook</th>
                <td>{{ review.get('Rediffbook') }}</td>
-               <td>{% if review.get('Rediffbook') %}<a href="{{ review.get('Rediffbook_url') }}"><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
+               <td>{% if review.get('Rediffbook') %}<a href="{{ review.get('Rediffbook_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
             <tr><th>Price on Crossword</th>
               <td>{{ review.get('Crossword') }}</td>
-              <td>{% if review.get('Crossword') %}<a href="{{ review.get('Crossword_url') }}"><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
+              <td>{% if review.get('Crossword') %}<a href="{{ review.get('Crossword_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
               <tr></tr>
-              <tr><th>Rating </th>
+              <tr><th>Rating On Flipkart:</th>
           <td>{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
           </table></div>
         </div>

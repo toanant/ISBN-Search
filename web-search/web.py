@@ -77,7 +77,7 @@ def search():
 		if detail:
 			return render_template("details.html",
                                    book=detail, review=review)
-		else: 
+		else:
 			return render_template("Error.html")
 	elif keywords:
 		if len(keywords) == 0:
