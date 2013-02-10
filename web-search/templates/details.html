@@ -9,13 +9,15 @@
           <table class="table table-condensed">
             <tr><th>Author</th>
 				<td>{{ book.get("author") }}</td>
-				<td><a href="/author/{{ book.author.replace('/', ' ') }}/"><span class="badge badge-success">Search</span></a></td></tr>
+			{% if book.author %}<td>
+				<a href="/author/{{ book.author}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
             <tr><th>Publisher</th>
 				<td>{{ book.get("Publisher") }}</td>
-				<td><a href="/publisher/{{ book['Publisher'].replace('/', ' ')}}/"><span class="badge badge-success">Search</span></a></td></tr>
+				{% if book["Publisher"] %}<td>
+					<a href="/publisher/{{ book['Publisher']}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
             <tr><th>Publication Year</th>
 				<td>{{ book.get("Publication Year") }}</td>
-				<td><a href="/year/{{ book['Publication Year'].replace('/', ' ')}}/"><span class="badge badge-success">Search</span></a></td></tr>
+				{% if book["Publication Year"] %}	<td><a href="/year/{{ book['Publication Year']}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
             <tr><th>Language</th>
               <td>{{book.get("Language")}}</td></tr>
             <tr><th>ISBN-13</th>
