@@ -8,7 +8,7 @@ def crawl():
 		rev = cursor[i]
 		u = str(rev['_id'])
 		get_review.delay(u)
-		print i
+		print u
 		i += 1
 
 crawl()

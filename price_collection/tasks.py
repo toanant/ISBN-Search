@@ -30,17 +30,16 @@ def get_review(isbn):
 		t_url = value + isbn
 		key_url = key + '_url'
 		attrs[key_url] = t_url
-		r = requests.get(t_url, proxies=proxy)	
+		r = requests.get(t_url, proxies=proxy)
 		if r.status_code == 200:
-			d[key] = pq(r.text)	
-	
+			d[key] = pq(r.text)
 	## for Infibeam website Price
 	if (d.get('Infibeam') != None):
 		Ib = d.get('Infibeam')
 		attrs['Infibeam'] = Ib("span[class=\"infiPrice amount price\"]").text()
 	else:
 		attrs['Infibeam'] = 'None'
-	
+
 	## for Crossword website Price
 	if (d.get('Crossword') != None):
 		try:
@@ -49,7 +48,7 @@ def get_review(isbn):
 			attrs['Crossword'] = d.get('Crossword')("span[class=\"variant-final-price\"]").text()
 	else:
 		attrs['Crossword'] = 'None'
-	
+
 	## for Homeshop18 website Price
 	if (d.get('Homeshop18') != None):
 		try:
@@ -58,14 +57,14 @@ def get_review(isbn):
 			attrs['Homeshop18'] = d.get('Homeshop18')("span[class=\"pdp_details_hs18Price\"]").text()
 	else:
 		attrs['Homeshop18'] = 'None'
-	
+
 	## for Bookadda website Price
 	if (d.get('Bookadda') != None):
 		try:
 			attrs['Bookadda'] = d.get('Bookadda')("span[class=\"actlprc\"]").text().strip('Rs.')
 		except AttributeError:
 			attrs['Bookadda'] = d.get('Bookadda')("span[class=\"actlprc\"]").text()
-	
+
 	else:
 		attrs['Bookadda'] = 'None'
 	## for rediff book website
