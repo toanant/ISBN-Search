@@ -9,8 +9,8 @@
           <table class="table table-condensed">
             <tr><th>Author</th>
 				<td>{{ book.get("author") }}</td>
-			{% if book.author %}<td>
-				<a href="/author/{{ book.author}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
+				{% if book.author %} {% if book.author != 'None' %}<td>
+					<a href="/author/{{ book.author}}/"><span class="badge badge-success">Search</span></a></td>{% endif %} {% endif %}</tr>
             <tr><th>Publisher</th>
 				<td>{{ book.get("Publisher") }}</td>
 				{% if book["Publisher"] %}<td>
@@ -45,7 +45,7 @@
                 <td>{% if review.get('Homeshop18') %} <a href="{{review.get('Homeshop18_url')}}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr><th>Price on Rediffbook</th>
                <td>{{ review.get('Rediffbook') }}</td>
-               <td>{% if review.get('Rediffbook') %}<a href="{{ review.get('Rediffbook_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
+			   <td>{% if review.get('Rediffbook') %}{% if review.get('Rediffbook') != 'None' %}<a href="{{ review.get('Rediffbook_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a>{% endif %} {% endif %}</td></tr>
             <tr><th>Price on Crossword</th>
               <td>{{ review.get('Crossword') }}</td>
               <td>{% if review.get('Crossword') %}<a href="{{ review.get('Crossword_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
