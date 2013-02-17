@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {% for book in books %}
             <url>
-              <loc>{{url_root}}/books/{{ book.id }}/</loc>
+              <loc>{{url_root}}/books/{{ book._id }}/</loc>
               <changefreq>weekly</changefreq>
             </url>
     {% endfor %}
