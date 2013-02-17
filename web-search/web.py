@@ -25,11 +25,18 @@ def sitemap():
     rules = app.url_map.iter_rules()
     return render_template('sitemap.xml', url_root=url_root, rules=rules)
 
+
 @app.route('/books_sitemap.xml')
 def books_sitemap():
     books = db.Details.find()
     url_root = request.url_root[:-1]
     return render_template('books_sitemap.xml', url_root=url_root, books=books)
+
+
+@app.route("/robots.txt")
+def home():
+    return render_template("robots.txt")
+
 
 @app.route("/books/<id>/")
 def detail(id):
