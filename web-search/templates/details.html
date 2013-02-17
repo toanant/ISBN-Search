@@ -1,37 +1,39 @@
 {% extends "base.html" %}
-{% block title %}{{ book.name }}{% endblock %}
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid" itemscope itemtype="http://schema.org/Book">
+<h1 itemprop="name">{{ book.name }}</h1>
   <div class="row-fluid">
    <div class="span10">
       <div class="row-fluid">
         <div class="span5">
           <table class="table table-condensed">
             <tr><th>Author</th>
-				<td>{{ book.get("author") }}</td>
+				<td itemprop="author">{{ book.get("author") }}</td>
 				{% if book.author %} {% if book.author != 'None' %}<td>
 					<a href="/author/{{ book.author}}/"><span class="badge badge-success">Search</span></a></td>{% endif %} {% endif %}</tr>
             <tr><th>Publisher</th>
-				<td>{{ book.get("Publisher") }}</td>
+				<td itemprop="publisher">{{ book.get("Publisher") }}</td>
 				{% if book["Publisher"] %}<td>
 					<a href="/publisher/{{ book['Publisher'] }}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
             <tr><th>Publication Year</th>
-				<td>{{ book.get("Publication Year") }}</td>
+				<td itemprop="datePublished" content="{{ book.get("Publication Year") }}">{{ book.get("Publication Year") }}</td>
 				{% if book["Publication Year"] %}	<td><a href="/year/{{ book['Publication Year']}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
             <tr><th>Language</th>
-              <td>{{book.get("Language")}}</td></tr>
+              <td itemprop="inLanguage">{{book.get("Language")}}</td></tr>
             <tr><th>ISBN-13</th>
-              <td>{{book.get("_id")}}</td></tr>
+              <td itemprop="isbn">{{book.get("_id")}}</td></tr>
             <tr><th>ISBN-10</th>
-              <td>{{book.get("ISBN-10")}}</td></tr>
+              <td itemprop="isbn">{{book.get("ISBN-10")}}</td></tr>
             <tr><th> No. of Pages</th>
-              <td>{{book.get('Number of Pages')}}</td></tr>
+              <td itemprop="numberOfPages">{{book.get('Number of Pages')}}</td></tr>
             <tr><th>Binding</th>
-              <td>{{book.get("Binding")}}</td></tr>
+              <td itemprop="bookFormat" href="http://schema.org/Paperback">{{book.get("Binding")}}</td></tr>
           </table></div>
         <div class="span5">
           <table class="table table-condensed">
-            <tr><th>Price on Flipkart</th>
+          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="INR" />
+            <tr><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Flipkart</span></th>
               <td>{{ review.get('flipkart') }}</td>
               <td>{% if review.get('flipkart') %}<a href="{{ review.get('flipkart_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr><th>Price on Infibeam</th>
@@ -49,18 +51,18 @@
             <tr><th>Price on Crossword</th>
               <td>{{ review.get('Crossword') }}</td>
               <td>{% if review.get('Crossword') %}<a href="{{ review.get('Crossword_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
-              <tr></tr>
-              <tr><th>Rating On Flipkart:</th>
-          <td>{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
+              <tr></tr></div>
+              <tr><th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
+          <td itemprop="price">{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
           </table></div>
         </div>
     <div class="container">
   <h3>  Description: </h3>
-  <p class="text-success">{{ book.get('summary') | safe }}</p>
+  <p itemprop="description" class="text-success">{{ book.get('summary') | safe }}</p>
    </div>
   </div>
   <div class="span2">
-      <img src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br>
+      <img itemprop="image" src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br>
       <script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
       <script type="text/javascript">
         GBS_insertPreviewButtonPopup('ISBN:{{book.get('ISBN-10')}}');
