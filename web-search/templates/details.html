@@ -53,7 +53,7 @@
               <td>{% if review.get('Crossword') %}<a itemprop="url" href="{{ review.get('Crossword_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
               <tr></tr></div>
               <tr><th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
-          <td itemprop="price">{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
+          <td itemprop="ratingValue">{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
           </table></div>
         </div>
     <div class="container">
