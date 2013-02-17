@@ -32,24 +32,23 @@
         <div class="span5">
           <table class="table table-condensed">
           <div>
-            <meta itemprop="priceCurrency" content="INR" />
             <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Flipkart</span></th>
-              <td itemprop="price">{{ review.get('flipkart') }}</td>
+              <td itemprop="price">{{ review.get('flipkart') }}</td><meta itemprop="priceCurrency" content="INR" />
               <td>{% if review.get('flipkart') %}<a itemprop="url" href="{{ review.get('flipkart_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Infibeam</span></th>
-              <td>{{ review.get('Infibeam') }}</td>
+              <td itemprop="price">{{ review.get('Infibeam') }}</td><meta itemprop="priceCurrency" content="INR" />
               <td>{% if review.get('Infibeam') %} <a itemprop="url" href="{{review.get('Infibeam_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Bookadda</span></th>
-              <td>{{ review.get('Bookadda') }}</td>
+              <td itemprop="price">{{ review.get('Bookadda') }}</td><meta itemprop="priceCurrency" content="INR" />
               <td>{% if review.get('Bookadda') %} <a itemprop="url" href="{{ review.get('Bookadda_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Homeshop18</span></th>
-                <td>{{ review.get('Homeshop18') }}</td>
+                <td itemprop="price">{{ review.get('Homeshop18') }}</td><meta itemprop="priceCurrency" content="INR" />
                 <td>{% if review.get('Homeshop18') %} <a itemprop="url" href="{{review.get('Homeshop18_url')}}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
             <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Rediffbook</span></th>
-               <td>{{ review.get('Rediffbook') }}</td>
+               <td itemprop="price">{{ review.get('Rediffbook') }}</td><meta itemprop="priceCurrency" content="INR" />
 			   <td>{% if review.get('Rediffbook') %}{% if review.get('Rediffbook') != 'None' %}<a href="{{ review.get('Rediffbook_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a>{% endif %} {% endif %}</td></tr>
             <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Crossword</span></th>
-              <td>{{ review.get('Crossword') }}</td>
+              <td itemprop="price">{{ review.get('Crossword') }}</td><meta itemprop="priceCurrency" content="INR" />
               <td>{% if review.get('Crossword') %}<a itemprop="url" href="{{ review.get('Crossword_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
               <tr></tr></div>
               <tr><th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
