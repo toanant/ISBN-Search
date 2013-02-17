@@ -47,6 +47,11 @@ def year_page(year):
                              re.compile(year, re.IGNORECASE)}).limit(31)
     return render_template("results.html", books=books)
 
+@app.route("/list-of-books/")
+def year_page(year):
+    books = db.Details.find()
+    return render_template("results.html", books=books)
+
 
 @app.route("/search/", methods=["GET"])
 def search():
