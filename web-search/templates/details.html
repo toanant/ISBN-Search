@@ -14,7 +14,7 @@
             <tr><th>Publisher</th>
 				<td>{{ book.get("Publisher") }}</td>
 				{% if book["Publisher"] %}<td>
-					<a href="/publisher/{{ book['Publisher']}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
+					<a href="/publisher/{{ book['Publisher'] }}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
             <tr><th>Publication Year</th>
 				<td>{{ book.get("Publication Year") }}</td>
 				{% if book["Publication Year"] %}	<td><a href="/year/{{ book['Publication Year']}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
@@ -55,7 +55,7 @@
           </table></div>
         </div>
     <div class="container">
-  <h3>  Description: On Flipkart.com  </h3>
+  <h3>  Description: </h3>
   <p class="text-success">{{ book.get('summary') | safe }}</p>
    </div>
   </div>

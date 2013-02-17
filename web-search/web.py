@@ -7,7 +7,6 @@ from flask.ext.paginate import Pagination
 from check_isbn import *
 # from pyelasticsearch import ElasticSearch
 
-
 # connect to mongodb database
 connection = MongoClient()
 db = connection.abhi
@@ -88,6 +87,7 @@ def search():
         if len(keywords) == 0:
             return render_template("Error.html")
         else:
+ #           keywords =  '^'+ keywords
             books = db.Details.find({'keywords':re.compile(keywords, re.IGNORECASE)}).limit(37)
             if (books.count() != 0):
                 return render_template("results.html",books=books)
@@ -96,5 +96,5 @@ def search():
     else:
         return render_template("Error.html")
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
