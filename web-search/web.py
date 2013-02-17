@@ -74,7 +74,11 @@ def search():
     #page = request.args.get("page")
 
     isbn = request.args.get("isbn")
-    keywords = request.args.get("keywords")
+    keywords = request.args.get("keywords", "").strip()
+    
+    if not isbn and len(keywords) < 2:
+            return render_template("Error.html")
+    
     pattern_13 = re.compile(r"\d{13}")
     if isbn:
         if pattern_13.search(isbn):
