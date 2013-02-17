@@ -34,7 +34,7 @@ def books_sitemap():
 
 
 @app.route("/robots.txt")
-def home():
+def robots():
     return render_template("robots.txt")
 
 
