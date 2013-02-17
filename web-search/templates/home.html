@@ -1,17 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
-<ul class="nav nav-tabs">
-	<li> <a href="#about_website" data-toggle="tab">About the website</a></li>
+<ul class="nav nav-tabs" id="myTab">
+	<li class="active"> <a href="#about_website" data-toggle="tab">About the website</a></li>
 	<li><a href="#about_keywords" data-toggle="tab">Search Using Keywords</a></li>
 	<li><a href="#about_isbn" data-toggle="tab">Search using ISBN</a></li>
-	<li><a href="#modal_about" data-toggle="modal">About</a></li>
+	<li><a href="#modal_about" data-toggle="modal">About me</a></li>
 
 </ul>
 
 <div class="tab-content">
- <div id="about_website" class="tab-pane">
-		 <h3>About the Website</h3>
+ <div id="about_website" class="tab-pane active">
 		 <p class="lead"><em> This Website is designed to help searching & buying of books by just reviewing their details and comparing their prices on major book-selling websites in india. This single result page contain entire book details with price from different websites including links to buy that book on particular site if book is available there. On Result page you can search on <b>"Author"</b>, <b>"Publisher"</b>,<b> "Publication Year"</b> fields.
      It also contains <b>Google Preview Button </b>integrated to view book content if book is available for book preview on Google Books.<br />
      Result Contains Price of Books on following websites :</em>
@@ -26,20 +25,18 @@
 	</div>
 
 <div id="about_keywords" class="tab-pane">
-		 <h3>Search Using Keywords</h3>
 	 <p class="lead"><em>To search using keywords just enter the keywords which define your book title/topic.<br /> For example : to search books on Mahatma Gandhi just enter Gandhi then select the book which suites you. Each Link contains the details.</em></p>	
 	</div>
 
 <div id="about_isbn" class="tab-pane">  
-			 <h3>Search Using ISBN</h3>
+	
 		 <p class="lead"><em>Search using ISBN is comparatevely fast and smooth than keywords. Either enter the ISBN-13 or ISBN-10 in the search using ISBN field<br />For example to search book of "The Pragmatic Programmer: From Journeyman to Master 1st Edition"  just enter <b>ISBN-13 as '9780201616224' or ISBN-10 as '020161622X'</b> in the isbn field then submit. If Book exists in the database you will see the result.</em></p>
 		</div>
 </div>
 </div>
 <div id="modal_about" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal_about" aria-hidden="true">
 	    <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3>About Me</h3>
+			    <button type="button" class="btn btn-info close" data-dismiss="modal" aria-hidden="true">close</button>
 		</div>
 		<div class="modal-body">
 			<p>
@@ -60,7 +57,6 @@
 	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
 	<script>
 		$("a[data-toggle=popover]").popover().click(function(e) {e.preventDefault()});
-		$('#myTab a[href="#profile"]').tab('show'); // Select tab by name
 	</script>
 
 {% endblock %}
