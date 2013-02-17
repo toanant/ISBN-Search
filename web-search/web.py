@@ -50,11 +50,11 @@ def year_page(year):
 
 @app.route("/search/", methods=["GET"])
 def search():
-    search = True
-    _started_at = datetime.now()
-    start = request.args.get("start")
-    limit = request.args.get("limit")
-    page = request.args.get("page")
+    #search = True
+    #_started_at = datetime.now()
+    #start = request.args.get("start")
+    #limit = request.args.get("limit")
+    #page = request.args.get("page")
 
     isbn = request.args.get("isbn")
     keywords = request.args.get("keywords")
@@ -87,7 +87,8 @@ def search():
         if len(keywords) == 0:
             return render_template("Error.html")
         else:
- #           keywords =  '^'+ keywords
+
+            keywords = '^'+ keywords
             books = db.Details.find({'keywords':re.compile(keywords, re.IGNORECASE)}).limit(37)
             if (books.count() != 0):
                 return render_template("results.html",books=books)
