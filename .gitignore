@@ -1,6 +1,6 @@
 #Project Specific gitignores
 
-
+*.wsgi
 # virtualenv
 venv/
 

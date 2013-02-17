@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="row">
+	<div class="span12"><br></div>
+</div>
+<div class="container">
 <ul class="nav nav-tabs" id="myTab">
 	<li class="active"> <a href="#about_website" data-toggle="tab">About the website</a></li>
 	<li><a href="#about_keywords" data-toggle="tab">Search Using Keywords</a></li>
@@ -59,6 +62,6 @@
 	<script>
 		$("a[data-toggle=popover]").popover().click(function(e) {e.preventDefault()});
 	</script>
-
+</div>
 {% endblock %}
 
