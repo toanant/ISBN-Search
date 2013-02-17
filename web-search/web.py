@@ -19,6 +19,13 @@ def home():
     return render_template("home.html")
 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    url_root = request.url_root[:-1]
+    rules = app.url_map.iter_rules()
+    return render_template('sitemap.xml', url_root=url_root, rules=rules)
+
+
 @app.route("/books/<id>/")
 def detail(id):
     book = db.Details.find_one({"_id": id})
