@@ -48,7 +48,7 @@ def year_page(year):
     return render_template("results.html", books=books)
 
 @app.route("/list-of-books/")
-def year_page(year):
+def list_of_books():
     books = db.Details.find()
     return render_template("results.html", books=books)
 
