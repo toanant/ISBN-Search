@@ -3,7 +3,7 @@
     {% for book in books %}
             <url>
               <loc>{{url_root}}/books/{{ book._id }}/</loc>
-              <changefreq>weekly</changefreq>
+              <changefreq>hourly</changefreq>
             </url>
     {% endfor %}
 </urlset>
