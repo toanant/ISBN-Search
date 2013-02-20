@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="en" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 	<head>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,26 +11,25 @@
 	</head>
 	{% endblock %}
 	<body>
-		<div class="row">
+		<div class="row-fluid">
 			<div class="span2">
 				<a href="/">
-					<button class="btn btn-primary" type="button">
-						<i class="icon-home icon-white"></i> 
-				</button></a>
+					<i class="icon-home icon-white"></i>
+					<img src="/static/img/logo.png" class="img-rounded"></a>
 			</div>
 			<div class="span5">
-				<h3 class='pull-left'>
+				<h3>
 					<p class="text-info"> Search books using <abbr title="keywords related to your book title or subject" class="initialism">Keywords</abbr></p>
 				</h3>
-				<form method="get" action="/search/" class="navbar-form pull-left">
+				<form method="get" action="/search/" class="navbar-form">
 					<input type="text" name="keywords" placeholder="Enter your keywords " class="input-medium search-query">
 					<input type="submit" value="submit" class="btn btn-success"></button></form>
 		</div>
 		<div class="span5">
-			<h3 class="pull-right" >
+			<h3>
 				<p class="text-info">Search books using <abbr title="International Standard Book Number" class="initialism">ISBN</abbr></p>
 			</h3>
-			<form method="get" action="/search/" class="navbar-form pull-right">
+			<form method="get" action="/search/" class="navbar-form">
 				<input type="text" name="isbn" placeholder="Enter your ISBN here" class="input-medium search-query">
 				<input type="submit" value="submit"class="btn btn-success"></button></form>
 	</div>
