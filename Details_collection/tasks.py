@@ -17,7 +17,7 @@ Details = db.Details
 Review = db.Review
 @celery.task
 def get_detail(val):
-	detail = {}    
+	detail = {}
 	l = []
 	proxy = {'socks4':'127.0.0.1:9050'}
 	attrs = {}
@@ -29,8 +29,8 @@ def get_detail(val):
 	r = requests.get(url, proxies=proxy)
 	if r.status_code == 200:
        ## vt = request.get(view_text_url)
-		
-		d = pq(r.text)		
+
+		d = pq(r.text)
 		summary =  d('div[id="description"]').html()
 		if(summary != None):
 			attrs['summary'] = summary
@@ -51,7 +51,7 @@ def get_detail(val):
 			attrs['image'] = d("#mprodimg-id").find("img").attr("data-src")
 		else:
 			attrs['image'] = d('.image-wrapper > img').attr('src')
-		
+
 		attrs["name"] = d("h1[itemprop=\"name\"]").attr("title")
 		if( d(".secondary-info > a").text()):
 			attrs["author"] = d(".secondary-info > a").text()
@@ -64,7 +64,7 @@ def get_detail(val):
 		td_set = d(".fk-specs-type2 > tr >td").items()
 		for key in td_set:
 			detail[key.text()] = td_set.next().text()
-        	
+
 		attrs['Publisher'] = detail.get('Publisher')
 		attrs['Publication Year']= detail.get('Publication Year')
 		attrs['_id'] = val
@@ -75,4 +75,3 @@ def get_detail(val):
 		attrs['date'] = datetime.datetime.utcnow()
 		Details.insert(attrs)
 		Review.insert(fk)
-        
