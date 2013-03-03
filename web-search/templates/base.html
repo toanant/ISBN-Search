@@ -11,37 +11,47 @@
 	</head>
 	{% endblock %}
 	<body>
+	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span2">
-				<a href="/">
-					<i class="icon-home icon-white"></i>
-					<img src="/static/img/logo.png" class="img-rounded"></a>
+				<div class="row-fluid">
+					<div class="span12">
+						<img src="/static/img/logo.jpg" class="img-rounded" />
+					</div>
+					<div class="span12">
+						 <a href="/">
+							 <button type="button" class="btn btn-large btn-primary">
+								 <strong> Home</strong>
+							</button> 
+						 </a>
+																																					                     </div>
+				</div>
 			</div>
-			<div class="span5">
-				<h3>
-					<p class="text-info"> Search books using <abbr title="keywords related to your book title or subject" class="initialism">Keywords</abbr></p>
-				</h3>
-				<form method="get" action="/search/" class="navbar-form">
-					<input type="text" name="keywords" placeholder="Enter your keywords " class="input-medium search-query">
-					<input type="submit" value="submit" class="btn btn-success"></button></form>
+			<div class="span10">
+				<div class="row-fluid">
+					<div class="span5">
+						<h3>
+							<p class="text-info"> Search books using <abbr title="keywords related to your book title or subject" class="initialism">Keywords</abbr></p>
+						</h3>
+							<form method="get" action="/search/" class="navbar-form">
+								<input type="text" name="keywords" placeholder="Enter your keywords " class="input-medium search-query">
+								<input type="submit" value="submit" class="btn btn-success"></button></form>
+					</div>
+					<div class="span5">
+						<h3>
+							<p class="text-info">Search books using <abbr title="International Standard Book Number" class="initialism">ISBN</abbr></p>
+						</h3>
+							<form method="get" action="/search/" class="navbar-form">
+								<input type="text" name="isbn" placeholder="Enter your ISBN here" class="input-medium search-query">
+								<input type="submit" value="submit"class="btn btn-success"></button></form>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="span5">
-			<h3>
-				<p class="text-info">Search books using <abbr title="International Standard Book Number" class="initialism">ISBN</abbr></p>
-			</h3>
-			<form method="get" action="/search/" class="navbar-form">
-				<input type="text" name="isbn" placeholder="Enter your ISBN here" class="input-medium search-query">
-				<input type="submit" value="submit"class="btn btn-success"></button></form>
 	</div>
-</div>
-		</div>
-	</div>
-
-	<div>
 		{% block content %}
 
 		{% endblock %}
-	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
 	{% block js %}
