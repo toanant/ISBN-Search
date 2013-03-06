@@ -100,4 +100,3 @@ def update_review(isbn):
 
 	Review.save(attrs)
 
-update_review('9780007253906')
