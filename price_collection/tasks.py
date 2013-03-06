@@ -52,9 +52,9 @@ def get_review(isbn):
 	## for Homeshop18 website Price
 	if (d.get('Homeshop18') != None):
 		try:
-			attrs['Homeshop18'] = d.get('Homeshop18')("span[class=\"pdp_details_hs18Price\"]").text().strip('Rs.')
+			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\"hs18Price\"]").text().split()[1]
 		except AttributeError:
-			attrs['Homeshop18'] = d.get('Homeshop18')("span[class=\"pdp_details_hs18Price\"]").text()
+			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\"hs18Price\"]").text()
 	else:
 		attrs['Homeshop18'] = 'None'
 
