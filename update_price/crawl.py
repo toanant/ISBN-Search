@@ -8,9 +8,9 @@ def crawl():
 		u = str(result['_id'])
 		past = result['date']
 		now = datetime.datetime.utcnow()
-		if ((now - past) > timedelta(hours = 84)):
+		if ((now - past) > timedelta(hours = 44)):
 			update_review.delay(u)
-		
+			print u
 		print i
 		i -= 1
                 

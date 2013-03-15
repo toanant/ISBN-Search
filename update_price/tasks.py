@@ -23,7 +23,7 @@ Review= db.Review
 def update_review(isbn):
 	attrs = {}
 	d = {}
-	old = Review.find_one({'_id':isbn})
+#	old = Review.find_one({'_id':isbn})
 	proxy = {'socks4':'127.0.0.1:9050'}	
 	for key, value in urlset.items():
 		t_url = value + isbn
@@ -48,11 +48,8 @@ def update_review(isbn):
 			attrs["ratingCount"] = 'None'
 	
 	else:
-		attrs['flipkart'] = old['flipkart']
-		attrs['ratingValue'] = old['ratingValue']
-		attrs['ratingCount'] = old['ratingCount']	
+		attrs['flipkart'] = 'None'		
 		
-	attrs['_id'] = isbn
 	attrs['date'] = datetime.datetime.utcnow()
 	
 ## for Infibeam website Price
@@ -60,7 +57,7 @@ def update_review(isbn):
 		Ib = d.get('Infibeam')
 		attrs['Infibeam'] = Ib("span[class=\"infiPrice amount price\"]").text()
 	else:
-		attrs['Infibeam'] = old['Infibeam']
+		attrs['Infibeam'] = 'None'
 
 ## for Crossword website Price
 	if (d.get('Crossword') != None):
@@ -69,7 +66,7 @@ def update_review(isbn):
 		except AttributeError:
 			attrs['Crossword'] = d.get('Crossword')("span[class=\"variant-final-price\"]").text()
 	else:
-		attrs['Crossword']	= old['Crossword']
+		attrs['Crossword']	= 'None'
 
 ## for Homeshop18 website Price
 	if (d.get('Homeshop18') != None):
@@ -78,7 +75,7 @@ def update_review(isbn):
 		except AttributeError:
 			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\"hs18Price\"]").text()
 	else:
-		attrs['Homeshop18'] = old['Homeshop18']
+		attrs['Homeshop18'] = 'None'
 
 ## for Bookadda website Price
 	if (d.get('Bookadda') != None):
@@ -88,7 +85,7 @@ def update_review(isbn):
 			attrs['Bookadda'] = d.get('Bookadda')("span[class=\"actlprc\"]").text()
 
 	else:
-		attrs['Bookadda'] = old['Bookadda']
+		attrs['Bookadda'] = 'None'
 ## for rediff book website
 	if (d.get('Rediffbook') != None):
 		try:
@@ -96,7 +93,10 @@ def update_review(isbn):
 		except (IndexError, AttributeError), e:
 			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text()
 	else:
-		attrs['Rediffbook'] = old['Rediffbook']
+		attrs['Rediffbook'] = 'None'
 
-	Review.save(attrs)
+	Review.update({'_id': isbn}, {'$set': {'Rediffbook': attrs['Rediffbook'], 'Infibeam': attrs['Infibeam'], 
+		      'Bookadda': attrs['Bookadda'], 'Crossword': attrs['Crossword'], 'Homeshop18':attrs['Homeshop18'],
+		      'date': attrs['date'], 'ratingCount': attrs.get('ratingCount'), 'ratingValue': attrs.get('ratingValue')}})
+
 
