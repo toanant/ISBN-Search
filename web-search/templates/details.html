@@ -1,90 +1,233 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container-fluid" itemscope itemtype="http://schema.org/Book">
-	<br /><br />
-	<h1 itemprop="name">{{ book.name }}</h1>
+  <br /><br />
+  <h1 itemprop="name">{{ book.name }}</h1>
   <div class="row-fluid">
-   <div class="span10">
+    <div class="span10">
       <div class="row-fluid">
         <div class="span5">
           <table class="table table-condensed">
-            <tr><th>Author</th>
-				<td itemprop="author">{{ book.get("author") }}</td>
-				{% if book.author %} {% if book.author != 'None' %}<td>
-					<a href="/author/{{ book.author}}/"><span class="badge badge-success">Search</span></a></td>{% endif %} {% endif %}</tr>
-            <tr><th>Publisher</th>
-				<td itemprop="publisher">{{ book.get("Publisher") }}</td>
-				{% if book["Publisher"] %}<td>
-					<a href="/publisher/{{ book['Publisher'] }}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
-            <tr><th>Publication Year</th>
-				<td itemprop="datePublished" content="{{ book.get("Publication Year") }}">{{ book.get("Publication Year") }}</td>
-				{% if book["Publication Year"] %}	<td><a href="/year/{{ book['Publication Year']}}/"><span class="badge badge-success">Search</span></a></td>{% endif %}</tr>
-            <tr><th>Language</th>
-              <td itemprop="inLanguage">{{book.get("Language")}}</td></tr>
-            <tr><th>ISBN-13</th>
-              <td itemprop="isbn">{{book.get("_id")}}</td></tr>
-            <tr><th>ISBN-10</th>
-              <td itemprop="isbn">{{book.get("ISBN-10")}}</td></tr>
-            <tr><th> No. of Pages</th>
-              <td itemprop="numberOfPages">{{book.get('Number of Pages')}}</td></tr>
-            <tr><th>Binding</th>
-              <td itemprop="bookFormat" href="http://schema.org/Paperback">{{book.get("Binding")}}</td></tr>
-          </table></div>
+            <tr>
+	      <th  style="color:#FC3F0A">Author</th>
+	      <td itemprop="author">
+		<strong style="color:#0F6600">	
+		  {{ book.get("author") }}
+		</strong>
+	      </td>
+	      {% if book.author %} 
+	      {% if book.author != 'None' %}
+	      <td>
+		<a href="/author/{{ book.author}}/">
+		  <span class="badge badge-success">Search</span>
+		</a>
+	      </td>
+	      {% endif %}
+	      {% endif %}
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A">Publisher</th>
+	      <td itemprop="publisher">
+		<strong style="color:#0F6600">
+		  {{ book.get("Publisher") }} 
+		</strong>
+	      </td>
+	      {% if book["Publisher"] %}
+	      <td>
+		<a href="/publisher/{{ book['Publisher'] }}/">
+		  <span class="badge badge-success">Search</span>
+		</a>
+	      </td>
+	      {% endif %}
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A" >Publication Year</th>
+	      <td itemprop="datePublished" content="{{ book.get("Publication Year") }}">
+		<strong style="color:#0F6600">
+		  {{ book.get("Publication Year") }}
+		</strong>
+	      </td>
+	      {% if book["Publication Year"] %}	
+	      <td>
+		<a href="/year/{{ book['Publication Year']}}/">
+		  <span class="badge badge-success">Search</span>
+		</a>
+	      </td>
+	      {% endif %}
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A">Language</th>
+              <td itemprop="inLanguage">
+		<strong style="color:#0F6600">
+		  {{book.get("Language")}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A">ISBN-13</th>
+              <td itemprop="isbn">
+		<strong style="color:#0F6600">	
+		  {{book.get("_id")}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A" >ISBN-10</th>
+              <td itemprop="isbn">
+		<strong style="color:#0F6600">
+		  {{book.get("ISBN-10")}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A"> No. of Pages</th>
+              <td itemprop="numberOfPages">
+		<strong style="color:#0F6600">
+		  {{book.get('Number of Pages')}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th  style="color:#FC3F0A">Binding</th>
+              <td itemprop="bookFormat" href="http://schema.org/Paperback">
+		<strong style="color:#0F6600">	
+		  {{book.get("Binding")}} 
+		  <strong>
+	    </td>
+	    </tr>
+          </table>
+	</div>
         <div class="span5">
           <table class="table table-condensed">
-          <div>
-            <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Flipkart</span></th>
-              <td itemprop="price">{{ review.get('flipkart') }}</td><meta itemprop="priceCurrency" content="INR" />
-              <td>{% if review.get('flipkart') %}<a itemprop="url" href="{{ review.get('flipkart_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
-            <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Infibeam</span></th>
-              <td itemprop="price">{{ review.get('Infibeam') }}</td><meta itemprop="priceCurrency" content="INR" />
-              <td>{% if review.get('Infibeam') %} <a itemprop="url" href="{{review.get('Infibeam_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
-            <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Bookadda</span></th>
-              <td itemprop="price">{{ review.get('Bookadda') }}</td><meta itemprop="priceCurrency" content="INR" />
-              <td>{% if review.get('Bookadda') %} <a itemprop="url" href="{{ review.get('Bookadda_url') }}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
-            <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Homeshop18</span></th>
-                <td itemprop="price">{{ review.get('Homeshop18') }}</td><meta itemprop="priceCurrency" content="INR" />
-                <td>{% if review.get('Homeshop18') %} <a itemprop="url" href="{{review.get('Homeshop18_url')}}" target="_blank" /> <span class="label label-warning">BUY Now</span></a>{% endif %}</td></tr>
-            <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Rediffbook</span></th>
-               <td itemprop="price">{{ review.get('Rediffbook') }}</td><meta itemprop="priceCurrency" content="INR" />
-			   <td>{% if review.get('Rediffbook') %}{% if review.get('Rediffbook') != 'None' %}<a href="{{ review.get('Rediffbook_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a>{% endif %} {% endif %}</td></tr>
-            <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer"><th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Crossword</span></th>
-              <td itemprop="price">{{ review.get('Crossword') }}</td><meta itemprop="priceCurrency" content="INR" />
-              <td>{% if review.get('Crossword') %}<a itemprop="url" href="{{ review.get('Crossword_url') }}" target="_blank" /><span class="label label-warning">BUY Now</span></a> {% endif %}</td></tr>
-              <tr></tr></div>
-              <tr><th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
-          <td itemprop="ratingValue">{{ review.get('ratingValue') }} <i class="icon-star"> </i></td></tr>
-          </table></div>
-        </div>
-		<div class="container">
-			<script type="text/javascript"><!--
-				google_ad_client = "ca-pub-8874613550008082";
-				/* 728x90 Book March 2013 */
-				google_ad_slot = "2396061436";
-				google_ad_width = 728;
-				google_ad_height = 90;
-				//-->
-			</script>
-			<script type="text/javascript"
-				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-			</script>
-		</div>
-	<br />
+            <div>
+              <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+		<th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Flipkart</span></th>
+		<td itemprop="price">
+		  {{ review.get('flipkart') }}
+		</td>
+		<meta itemprop="priceCurrency" content="INR" />
+		<td>
+		  {% if review.get('flipkart') %}
+		  <a itemprop="url" href="{{ review.get('flipkart_url') }}" target="_blank" />
+		  <span class="label label-warning">BUY Now</span>
+</a>
+{% endif %}
+</td>
+</tr>
+<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Infibeam</span></th>
+  <td itemprop="price">
+    {{ review.get('Infibeam') }}
+  </td>
+  <meta itemprop="priceCurrency" content="INR" />
+  <td>
+    {% if review.get('Infibeam') %} 
+    <a itemprop="url" href="{{review.get('Infibeam_url') }}" target="_blank" /> 
+    <span class="label label-warning">BUY Now</span>
+</a>
+{% endif %}
+</td>
+</tr>
+<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Bookadda</span></th>
+  <td itemprop="price">
+    {{ review.get('Bookadda') }}
+  </td>
+  <meta itemprop="priceCurrency" content="INR" />
+  <td>
+    {% if review.get('Bookadda') %}
+    <a itemprop="url" href="{{ review.get('Bookadda_url') }}" target="_blank" /> 
+    <span class="label label-warning">BUY Now</span>
+</a>
+{% endif %}
+</td>
+</tr>
+<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Homeshop18</span></th>
+  <td itemprop="price">
+    {{ review.get('Homeshop18') }}
+  </td>
+  <meta itemprop="priceCurrency" content="INR" />
+  <td>
+    {% if review.get('Homeshop18') %}
+    <a itemprop="url" href="{{review.get('Homeshop18_url')}}" target="_blank" /> 
+    <span class="label label-warning">BUY Now</span>
+</a>
+{% endif %}
+</td>
+</tr>
+<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Rediffbook</span></th>
+  <td itemprop="price">
+    {{ review.get('Rediffbook') }}
+  </td>
+  <meta itemprop="priceCurrency" content="INR" />
+  <td>
+    {% if review.get('Rediffbook') %}
+    {% if review.get('Rediffbook') != 'None' %}
+    <a href="{{ review.get('Rediffbook_url') }}" target="_blank" />
+    <span class="label label-warning">BUY Now</span>
+</a>
+{% endif %} 
+{% endif %}
+</td>
+</tr>
+<tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">Price on <span itemprop="name">Crossword</span></th>
+  <td itemprop="price">
+    {{ review.get('Crossword') }}
+  </td>
+  <meta itemprop="priceCurrency" content="INR" />
+  <td>
+    {% if review.get('Crossword') %}
+    <a itemprop="url" href="{{ review.get('Crossword_url') }}" target="_blank" />
+    <span class="label label-warning">BUY Now</span>
+</a> 
+{% endif %}
+</td>
+</tr>
+<tr>
+</tr>
+</div>
+<tr>
+  <th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
+  <td itemprop="ratingValue">
+    {{ review.get('ratingValue') }} 
+    <i class="icon-star"> </i>
+  </td>
+</tr>
+</table>
+</div>
+</div>
+<div class="container">
+  <script type="text/javascript"><!--
+				     google_ad_client = "ca-pub-8874613550008082";
+				     /* 728x90 Book March 2013 */
+				     google_ad_slot = "2396061436";
+				     google_ad_width = 728;
+				     google_ad_height = 90;
+				     //-->
+  </script>
+  <script type="text/javascript"
+	  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  </script>
+</div>
+<br />
 
 
 
-	<div class="container">
- 		 <h3>  Description: </h3>
- 	 	<p itemprop="description" class="text-success">{{ book.get('summary') | safe }}</p>
-   </div>
-  </div>
-  <div class="span2">
-      <img itemprop="image" src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br>
-      <script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
-      <script type="text/javascript">
-        GBS_insertPreviewButtonPopup('ISBN:{{book.get('ISBN-10')}}');
-      </script>
-    </div>
-    </div>
-  </div>
+<div class="container">
+  <h3>  Description: </h3>
+  <p itemprop="description" class="text-success">{{ book.get('summary') | safe }}</p>
+</div>
+</div>
+<div class="span2">
+  <img itemprop="image" src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br>
+  <script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
+  <script type="text/javascript">
+    GBS_insertPreviewButtonPopup('ISBN:{{book.get('ISBN-10')}}');
+  </script>
+</div>
+</div>
+</div>
 {% endblock %}
