@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 import re
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pymongo import MongoClient
 from flask.ext.paginate import Pagination
+from tasks import *
 from check_isbn import *
 
 
@@ -42,6 +43,16 @@ def robots():
 def detail(id):
     book = db.Details.find_one({"_id": id})
     review = db.Review.find_one({"_id": id})
+    past = review['date']
+    now = datetime.datetime.utcnow()
+    print past, now
+    if (now - past).days > 1:
+        print " i'm fucked"
+        #if review.get('task') == 'silent':
+        db.Review.update({'_id':id}, {'$set':{'task':'running'}})
+        get_price(id)
+        review = db.Review.find_one({"_id": id})
+
     return render_template("details.html", book=book, review=review)
 
 
@@ -115,5 +126,5 @@ def search():
     else:
         return render_template("Error.html")
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
