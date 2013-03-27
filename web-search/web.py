@@ -5,7 +5,7 @@ from datetime import datetime
 from pymongo import MongoClient
 from flask.ext.paginate import Pagination
 from check_isbn import *
-# from pyelasticsearch import ElasticSearch
+
 
 # connect to mongodb database
 connection = MongoClient()
@@ -53,11 +53,11 @@ def author_page(author_name):
 
 @app.route("/publisher/<publisher_name>/")
 def publisher_page(publisher_name):
-	publisher_name = str(publisher_name)
-	publisher_name = publisher_name.replace('/',' ')
-	books = db.Details.find({"Publisher":
-                             re.compile(publisher_name, re.IGNORECASE)}).limit(31)
-	return render_template("results.html", books=books)
+    publisher_name = str(publisher_name)
+    publisher_name = publisher_name.replace('/',' ')
+    books = db.Details.find({"Publisher":
+                                 re.compile(publisher_name, re.IGNORECASE)}).limit(31)
+    return render_template("results.html", books=books)
 
 
 @app.route("/year/<year>/")
@@ -69,11 +69,7 @@ def year_page(year):
 
 @app.route("/search/", methods=["GET"])
 def search():
-    #search = True
-    #_started_at = datetime.now()
-    #start = request.args.get("start")
-    #limit = request.args.get("limit")
-    #page = request.args.get("page")
+
 
     isbn = request.args.get("isbn")
     keywords = request.args.get("keywords", "").strip()

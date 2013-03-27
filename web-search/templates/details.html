@@ -9,9 +9,9 @@
         <div class="span5">
           <table class="table table-condensed">
             <tr>
-	      <th  style="color:#FC3F0A">Author</th>
+	      <th>Author</th>
 	      <td itemprop="author">
-		<strong style="color:#0F6600">	
+		<strong>	
 		  {{ book.get("author") }}
 		</strong>
 	      </td>
@@ -26,9 +26,9 @@
 	      {% endif %}
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A">Publisher</th>
+	      <th>Publisher</th>
 	      <td itemprop="publisher">
-		<strong style="color:#0F6600">
+		<strong>
 		  {{ book.get("Publisher") }} 
 		</strong>
 	      </td>
@@ -41,9 +41,9 @@
 	      {% endif %}
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A" >Publication Year</th>
+	      <th>Publication Year</th>
 	      <td itemprop="datePublished" content="{{ book.get("Publication Year") }}">
-		<strong style="color:#0F6600">
+		<strong>
 		  {{ book.get("Publication Year") }}
 		</strong>
 	      </td>
@@ -56,41 +56,41 @@
 	      {% endif %}
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A">Language</th>
+	      <th>Language</th>
               <td itemprop="inLanguage">
-		<strong style="color:#0F6600">
+		<strong>
 		  {{book.get("Language")}}
 		</strong>
 	      </td>
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A">ISBN-13</th>
+	      <th>ISBN-13</th>
               <td itemprop="isbn">
-		<strong style="color:#0F6600">	
+		<strong>	
 		  {{book.get("_id")}}
 		</strong>
 	      </td>
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A" >ISBN-10</th>
+	      <th>ISBN-10</th>
               <td itemprop="isbn">
-		<strong style="color:#0F6600">
+		<strong>
 		  {{book.get("ISBN-10")}}
 		</strong>
 	      </td>
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A"> No. of Pages</th>
+	      <th> No. of Pages</th>
               <td itemprop="numberOfPages">
-		<strong style="color:#0F6600">
+		<strong>
 		  {{book.get('Number of Pages')}}
 		</strong>
 	      </td>
 	    </tr>
             <tr>
-	      <th  style="color:#FC3F0A">Binding</th>
+	      <th>Binding</th>
               <td itemprop="bookFormat" href="http://schema.org/Paperback">
-		<strong style="color:#0F6600">	
+		<strong>	
 		  {{book.get("Binding")}} 
 		  <strong>
 	    </td>
@@ -218,7 +218,7 @@
 
 <div class="container">
   <h3>  Description: </h3>
-  <p itemprop="description" class="text-success">{{ book.get('summary') | safe }}</p>
+  <p itemprop="description" class="text-success" >{{ book.get('summary') | safe }}</p>
 </div>
 </div>
 <div class="span2">
