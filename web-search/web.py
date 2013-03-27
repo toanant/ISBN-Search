@@ -41,18 +41,18 @@ def robots():
 
 @app.route("/books/<id>/")
 def detail(id):
+    t1 = datetime.datetime.now()
     book = db.Details.find_one({"_id": id})
     review = db.Review.find_one({"_id": id})
     past = review['date']
     now = datetime.datetime.utcnow()
-    print past, now
     if (now - past).days > 1:
-        print " i'm fucked"
         #if review.get('task') == 'silent':
         db.Review.update({'_id':id}, {'$set':{'task':'running'}})
         get_price(id)
         review = db.Review.find_one({"_id": id})
-
+    t2 = datetime.datetime.now()
+    print "time taken {}".format((t2-t).total_seconds)
     return render_template("details.html", book=book, review=review)
 
 
