@@ -1,10 +1,10 @@
 #Project Specific gitignores
 
 # Apache configuration file
-isbn_apache.conf
+*.conf
 
 # WSGI Conf file
-isbn_search.wsgi
+*.wsgi
 
 
 
