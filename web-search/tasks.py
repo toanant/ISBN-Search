@@ -7,14 +7,14 @@ from pyquery import PyQuery as pq
 from lxml import etree
 import datetime
 from web_setting import *
-from celery import Celery
+#from celery import Celery
 
 from pymongo import MongoClient
 
 #from pyelasticsearch import ElasticSearch
 
 monkey.patch_all(httplib=True)
-celery = Celery("tasks", broker="amqp://guest@localhost")
+#celery = Celery("tasks", broker="amqp://guest@localhost")
 
 # connect to mongodb database
 connection = MongoClient()
@@ -22,7 +22,7 @@ db = connection.abhi
 Review= db.Review
 #es = ElasticSearch("http://localhost:9200")
 
-@celery.task
+#@celery.task
 def get_price(isbn):
     attrs = {}
     d = {}
@@ -101,7 +101,7 @@ def get_price(isbn):
 
     print d, attrs
     Review.update({'_id': isbn}, {'$set': {'Rediffbook': attrs['Rediffbook'], 'Infibeam': attrs['Infibeam'],
-                                           'flipakrt': attrs['flipkart'],
+                                           'flipkart': attrs['flipkart'],
                  'Bookadda': attrs['Bookadda'], 'Crossword': attrs['Crossword'], 'Homeshop18':attrs['Homeshop18'],
                  'date': datetime.datetime.utcnow(), 'ratingCount': attrs.get('ratingCount'), 'ratingValue': attrs.get('ratingValue'),
                                         'task': 'silent'}})

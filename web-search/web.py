@@ -52,7 +52,7 @@ def detail(id):
         get_price(id)
         review = db.Review.find_one({"_id": id})
     t2 = datetime.datetime.now()
-    print "time taken {}".format((t2-t).total_seconds)
+    print "time taken {}".format((t2-t1).total_seconds())
     return render_template("details.html", book=book, review=review)
 
 
