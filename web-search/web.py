@@ -4,7 +4,7 @@ import json
 from datetime import datetime, timedelta
 from pymongo import MongoClient
 from flask.ext.paginate import Pagination
-from tasks import *
+#from tasks import *
 from check_isbn import *
 
 
@@ -41,18 +41,8 @@ def robots():
 
 @app.route("/books/<id>/")
 def detail(id):
-    t1 = datetime.datetime.now()
     book = db.Details.find_one({"_id": id})
     review = db.Review.find_one({"_id": id})
-    past = review['date']
-    now = datetime.datetime.utcnow()
-    if (now - past).days > 1:
-        #if review.get('task') == 'silent':
-        db.Review.update({'_id':id}, {'$set':{'task':'running'}})
-        get_price(id)
-        review = db.Review.find_one({"_id": id})
-    t2 = datetime.datetime.now()
-    print "time taken {}".format((t2-t1).total_seconds())
     return render_template("details.html", book=book, review=review)
 
 

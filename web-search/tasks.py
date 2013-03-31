@@ -1,8 +1,8 @@
 ## This will update the review collection against the isbn.
 
 import requests
-import gevent
-from gevent import monkey
+#import gevent
+#from gevent import monkey
 from pyquery import PyQuery as pq
 from lxml import etree
 import datetime
@@ -13,7 +13,7 @@ from pymongo import MongoClient
 
 #from pyelasticsearch import ElasticSearch
 
-monkey.patch_all(httplib=True)
+#monkey.patch_all(httplib=True)
 #celery = Celery("tasks", broker="amqp://guest@localhost")
 
 # connect to mongodb database
@@ -27,17 +27,15 @@ def get_price(isbn):
     attrs = {}
     d = {}
     proxy = {'socks4':'127.0.0.1:9050'}
+    t_url = value + isbn
+    key_url = key + '_url'
+    attrs[key_url] = t_url
+    r = requests.get(t_url, proxies=proxy)
+    if r.status_code == 200:
+        d[key] = pq(r.text)
 
-    def fetch_url(key, value):
-        t_url = value + isbn
-        key_url = key + '_url'
-        attrs[key_url] = t_url
-        r = requests.get(t_url, proxies=proxy)
-        if r.status_code == 200:
-            d[key] = pq(r.text)
-
-    jobs = [gevent.spawn(fetch_url, key, value) for key, value in urlset.items()]
-    gevent.joinall(jobs)
+   # jobs = [gevent.spawn(fetch_url, key, value) for key, value in urlset.items()]
+    #gevent.joinall(jobs)
 
     ## for flipkart website
     if (d.get('flipkart') != None):
@@ -97,9 +95,6 @@ def get_price(isbn):
             attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\"proddetailinforight\"]").text()
     else:
         attrs['Rediffbook'] = 'None'
-
-
-    print d, attrs
     Review.update({'_id': isbn}, {'$set': {'Rediffbook': attrs['Rediffbook'], 'Infibeam': attrs['Infibeam'],
                                            'flipkart': attrs['flipkart'],
                  'Bookadda': attrs['Bookadda'], 'Crossword': attrs['Crossword'], 'Homeshop18':attrs['Homeshop18'],

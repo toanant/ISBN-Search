@@ -1,3 +1,4 @@
+import re
 import requests
 from pyquery import PyQuery as pq
 from lxml import etree
@@ -23,6 +24,7 @@ Review = db.Review
 def get_review(isbn):
 	attrs = {}
 	d = {}
+    sankhya = re.compile(r'\d+')
 	proxy = {'socks4':'127.0.0.1:9050'}
 	attrs['_id'] = isbn
 	attrs['date'] = datetime.datetime.utcnow()
