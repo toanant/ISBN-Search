@@ -4,8 +4,9 @@ import json
 from datetime import datetime, timedelta
 from pymongo import MongoClient
 from flask.ext.paginate import Pagination
-#from tasks import *
+from price_sort import *
 from check_isbn import *
+
 
 
 # connect to mongodb database
@@ -43,7 +44,8 @@ def robots():
 def detail(id):
     book = db.Details.find_one({"_id": id})
     review = db.Review.find_one({"_id": id})
-    return render_template("details.html", book=book, review=review)
+    book_prices = sort_prices(review)
+    return render_template("new_detail.html", book=book, prices=book_prices, review=review)
 
 
 @app.route("/author/<author_name>/")
@@ -99,8 +101,9 @@ def search():
             detail = db.Details.find_one({'_id': isbn})
         review = db.Review.find_one({'_id': isbn})
         if detail:
-            return render_template("details.html",
-                                   book=detail, review=review)
+            book_prices = sort_prices(review)
+            return render_template("new_detail.html",
+                                   book=detail, review=review, prices=book_prices)
         else:
             return render_template("Error.html")
     elif keywords:
