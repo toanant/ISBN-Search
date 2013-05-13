@@ -19,15 +19,6 @@
 		  {{ book.get("author") }}
 		</strong>
 	      </td>
-	      {% if book.author %} 
-	      {% if book.author != 'None' %}
-	      <td>
-		<a href="/author/{{ book.author}}/">
-			<button class="btn btn-success"> Search </button>
-		</a>
-	      </td>
-	      {% endif %}
-	      {% endif %}
 	    </tr>
             <tr>
 	      <th>Publisher</th>
@@ -36,14 +27,7 @@
 		<strong>
 		  {{ book.get("Publisher") }} 
 		</strong>
-	      </td>
-	      {% if book["Publisher"] %}
-	      <td>
-		<a href="/publisher/{{ book['Publisher'] }}/">
-		  <button class="btn btn-success">Search</button>
-		</a>
-	      </td>
-	      {% endif %}
+	     </td>
 	    </tr>
             <tr>
 	      <th>Publication Year</th>
@@ -52,13 +36,6 @@
 		  {{ book.get("Publication Year") }}
 		</strong>
 	      </td>
-	      {% if book["Publication Year"] %}	
-	      <td>
-		<a href="/year/{{ book['Publication Year']}}/">
-		  <button class="btn btn-success">Search</button>
-		</a>
-	      </td>
-	      {% endif %}
 	    </tr>
             <tr>
 	      <th>Language</th>
