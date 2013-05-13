@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid" itemscope itemtype="http://schema.org/Book">
+  <br /><br />
+  <div class="row-fluid">
+	   <h1 itemprop="name"> {{ book.name }} </h1>
+	
+  </div>
+  <div class="row-fluid">
+    <div class="span10">
+      <div class="row-fluid">
+        <div class="span6">
+
+          <table class="table table-condensed table-bordered table-hover">
+            <tr>
+	      <th>Author</th>
+	      <td itemprop="author">
+		<strong>	
+		  {{ book.get("author") }}
+		</strong>
+	      </td>
+	      {% if book.author %} 
+	      {% if book.author != 'None' %}
+	      <td>
+		<a href="/author/{{ book.author}}/">
+			<button class="btn btn-success"> Search </button>
+		</a>
+	      </td>
+	      {% endif %}
+	      {% endif %}
+	    </tr>
+            <tr>
+	      <th>Publisher</th>
+	      <td itemprop="publisher">
+
+		<strong>
+		  {{ book.get("Publisher") }} 
+		</strong>
+	      </td>
+	      {% if book["Publisher"] %}
+	      <td>
+		<a href="/publisher/{{ book['Publisher'] }}/">
+		  <button class="btn btn-success">Search</button>
+		</a>
+	      </td>
+	      {% endif %}
+	    </tr>
+            <tr>
+	      <th>Publication Year</th>
+	      <td itemprop="datePublished" content="{{ book.get("Publication Year") }}">
+		<strong>
+		  {{ book.get("Publication Year") }}
+		</strong>
+	      </td>
+	      {% if book["Publication Year"] %}	
+	      <td>
+		<a href="/year/{{ book['Publication Year']}}/">
+		  <button class="btn btn-success">Search</button>
+		</a>
+	      </td>
+	      {% endif %}
+	    </tr>
+            <tr>
+	      <th>Language</th>
+              <td itemprop="inLanguage">
+		<strong>
+		  {{book.get("Language")}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th>ISBN-13</th>
+              <td itemprop="isbn">
+		<strong>	
+		  {{book.get("_id")}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th>ISBN-10</th>
+              <td itemprop="isbn">
+		<strong>
+		  {{book.get("ISBN-10")}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th> No. of Pages</th>
+              <td itemprop="numberOfPages">
+		<strong>
+		  {{book.get('Number of Pages')}}
+		</strong>
+	      </td>
+	    </tr>
+            <tr>
+	      <th>Binding</th>
+              <td itemprop="bookFormat" href="http://schema.org/Paperback">
+		<strong>	
+		  {{book.get("Binding")}} 
+		  <strong>
+	    </td>
+	    </tr>
+          </table>
+	</div>
+        <div class="span6">
+          <table class="table table-condensed table-bordered table-hover">
+			  <div>
+			  {% for e in prices %} 
+			  <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+				  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">	Price on 
+					  <span itemprop="name"> 
+						  {% set a = e[0] %}
+						  {{ a }}
+					  </span>
+				  </th>
+				 <td itemprop="price">
+					 {{ e[1] }}
+				 </td>
+			 <meta itemprop="priceCurrency" content="INR" />
+			 <td>
+				 <a itemprop="url" href="{{ review.get(a + '_url')}}" target="_blank" />
+					 <span class="label label-warning">BUY Now</span>
+				 </a>
+			 </td>
+		 </tr>
+	{% endfor %}
+</div>
+<tr>
+  <th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
+  <td itemprop="ratingValue">
+    {{ review.get('ratingValue') }} 
+    <i class="icon-star"> </i>
+  </td>
+</tr>
+</table>
+</div>
+</div>
+<div class="row-fluid">
+	
+		<div class="span6">
+
+			<script type="text/javascript"><!--
+
+				google_ad_client = "ca-pub-8874613550008082";
+
+				/* Book 468x60 */
+
+				google_ad_slot = "9602453839";
+
+				google_ad_width = 468;
+
+				google_ad_height = 60;
+
+				//-->
+
+			</script>
+
+			<script type="text/javascript"
+
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+
+			</script>
+</div>
+<div class="span5">
+ <script type="text/javascript"><!--
+
+	 google_ad_client = "ca-pub-8874613550008082";
+
+	 /* Book 468x60 */
+
+	 google_ad_slot = "9602453839";
+
+	 google_ad_width = 468;
+
+	 google_ad_height = 60;
+
+	 //-->
+
+ </script>
+
+ <script type="text/javascript"
+
+	 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+ </script>
+</div>
+</div>
+
+<br />
+
+  <div class="row-fluid">
+	{% if recn %}
+	  <h2>Highly Recommended Book For You : </h2>
+      
+    <ul class="thumbnails">
+      {% for e in recn %}
+      <li class="span3">
+        <div class="thumbnail">
+          <a href='/books/{{ e.get('_id') }}'>
+	    <img src="{{ e.get('image') }}" alt="Preview not available">
+            <div class="caption">
+              <strong>{{ e.get('name') }}</strong>
+            </div>
+          </a>
+	</div>
+      </li>
+      {% endfor %}
+    </ul>
+	{% endif %}
+</div>
+  <div class="container-fluid">
+	  
+	  {% if book.get('summary') %}
+	  <h3>  Description: </h3>
+	   <p itemprop="description" class="text-success" >
+	   {{ book.get('summary') | safe }}
+	   </p>
+	   {% endif %}
+  </div>
+</div>
+<div class="span2">
+  <img itemprop="image" src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br />
+  <script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
+ <script>GBS_setLanguage('en');</script>
+  <script type="text/javascript">
+    GBS_insertPreviewButtonPopup('ISBN:{{book.get('ISBN-10')}}');
+  </script>
+</div>
+</div>
+</div>
+{% endblock %}
