@@ -1,6 +1,9 @@
-## Before Running this script make sure that you have already done with the celery tasks for crawl to that particular category. This script just store the isbn already crawled to category array in str form.
-## update the category string
-## to run uncomment the last line save it then run
+''' 
+Before Running this script make sure that you have already done with the
+celery tasks for crawl to that particular category. This script just store
+the isbn already crawled to category array in str form. Update the category
+string to run uncomment the last line save it then run.
+'''
 
 from pymongo import MongoClient
 connection = MongoClient()
@@ -26,5 +29,4 @@ def list():
 			isbn.append(h)	
 	attrs[category] = isbn
 	RISBN.insert(attrs)
-#list()
 

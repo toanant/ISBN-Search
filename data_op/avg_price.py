@@ -1,6 +1,10 @@
-## take the input as a json doc from mongodb or simply a result of find_one operation
+'''
+This module take the input as a json from mongoDB or
+simply a result of find_one operation and calculate the
+average price of the book to be used during the implementation
+of recommendation algorithm.
+'''
 import re
-#import operator
 from pymongo import MongoClient
 con = MongoClient()
 abhi = con.abhi
@@ -10,7 +14,8 @@ review = abhi.Review
 def avg_val(cursor):
     isbn =  cursor.get('_id')
     average = []
-    web_list = ['Bookadda', 'Crossword', 'Homeshop18', 'Infibeam', 'Rediffbook', 'flipkart']
+    web_list = ['Bookadda', 'Crossword', 'Homeshop18',
+		    'Infibeam', 'Rediffbook', 'flipkart']
     price =  {}
 
     for site in web_list:
@@ -33,15 +38,6 @@ def avg_val(cursor):
         average.append(int(e))
     if len(average) > 0:
         average = (min(average) + max(average)) // 2
-
-
-    '''ratingValue = cursor.get('ratingValue')
-    ratingCount = cursor.get('ratingCount')
-    if ratingValue == None:
-        ratingValue = 0
-    if ratingCount == None:
-        ratingCount = 0
-    return sorted(price.iteritems(), key=operator.itemgetter(1))'''
     review.update({'_id': isbn}, {'$set': {'avg_price': average }})
 
 def insert_val():

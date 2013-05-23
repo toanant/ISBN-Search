@@ -1,4 +1,9 @@
-## take the input as a json doc from mongodb or simply a result of find_one operation
+'''
+This module take the input as a json from mongoDB or 
+simply a result of find_one operation and clean the 
+content from unwanted symbols, strings and encode
+them into utf-8 and update into database.
+'''
 import re
 #import operator
 from pymongo import MongoClient
@@ -49,7 +54,8 @@ def clean_val(cursor):
     author = author.replace('(', '')
     author = author.replace(')', '')
     #return sorted(price.iteritems(), key=operator.itemgetter(1))
-    detail.update({'_id': isbn}, {'$set': {'Publication Year': year, 'Publisher': publisher, 'name': name, 'author': author }})
+    detail.update({'_id': isbn}, {'$set': {'Publication Year': year,
+	    'Publisher': publisher, 'name': name, 'author': author }})
 
 def update_val():
 

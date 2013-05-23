@@ -1,3 +1,9 @@
+'''
+This Module will crawl flipkart website and get
+json output containing isbn for different category.
+Start this by running celery task worker in the activated
+virtualenvironment.
+'''
 import requests
 from pyquery import PyQuery as pq
 from lxml import etree
@@ -14,7 +20,7 @@ celery = Celery("tasks", broker="amqp://guest@localhost")
 # connect to mongodb database
 connection = MongoClient()
 db = connection.abhi
-# Here RISBN define refined isbn collection in a list associated with category
+# ISBN define isbn collection in a list associated with category
 ISBN= db.ISBN
 @celery.task
 def get_isbn(category):
@@ -22,7 +28,8 @@ def get_isbn(category):
 	isbn = []
 	start = 0
 	while(True):
-		url = 'http://www.flipkart.com/%s?response-type=json&inf-start=%d'%(category, start)
+		# category and start get json for that page on flipkart
+		url = 'http://www.flipkart.com/%s?response-type=json&inf-start=%d'%(category,start)
 		r = requests.get(url)
 		if r.status_code == 200:
 			json= r.json()

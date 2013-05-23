@@ -1,3 +1,11 @@
+'''
+This Module assign task to celery worker and
+store them to RabbitMQ queue for the collection 
+of details of the book from filpkart website
+against the particular isbn and also get price of
+that book and store them to Review colection in
+MongoDB.
+'''
 from tasks import *
 
 def crawl():
