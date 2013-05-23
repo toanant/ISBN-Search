@@ -16,7 +16,8 @@ from pymongo import MongoClient
 
 #from pyelasticsearch import ElasticSearch
 
-celery = Celery("tasks", broker="amqp://guest@localhost")
+celery = Celery("tasks",
+         broker="amqp://guest@localhost")
 
 # connect to mongodb database
 connection = MongoClient()
@@ -52,8 +53,8 @@ def get_review(isbn):
 	
 	if (d.get('Infibeam') != None):
 		Ib = d.get('Infibeam')
-		attrs['Infibeam'] = Ib("span[class=
-				\"infiPrice amount price\"]").text()
+		attrs['Infibeam'] = Ib("span[class=\
+		    "infiPrice amount price\"]").text()
 	else:
 		attrs['Infibeam'] = 'None'
 
@@ -62,11 +63,11 @@ def get_review(isbn):
 	
 	if (d.get('Crossword') != None):
 		try:
-			attrs['Crossword'] = d.get('Crossword')("span[class=
-			\"variant-final-price\"]").text().strip('R')
+			attrs['Crossword'] = d.get('Crossword')("span[class=\
+                "variant-final-price\"]").text().strip('R')
 		except AttributeError:
-			attrs['Crossword'] = d.get('Crossword')("span[class=
-			\"variant-final-price\"]").text()
+			attrs['Crossword'] = d.get('Crossword')("span[class=\
+			        "variant-final-price\"]").text()
 	else:
 		attrs['Crossword'] = 'None'
 
@@ -75,11 +76,11 @@ def get_review(isbn):
 	
 	if (d.get('Homeshop18') != None):
 		try:
-			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=
-			\"hs18Price\"]").text().split()[1]
+			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\
+			        "hs18Price\"]").text().split()[1]
 		except AttributeError:
-			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=
-					\"hs18Price\"]").text()
+			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\
+			            "hs18Price\"]").text()
 	else:
 		attrs['Homeshop18'] = 'None'
 
@@ -88,11 +89,11 @@ def get_review(isbn):
 	
 	if (d.get('Bookadda') != None):
 		try:
-			attrs['Bookadda'] = d.get('Bookadda')("span[class=
-					\"actlprc\"]").text().strip('Rs.')
+			attrs['Bookadda'] = d.get('Bookadda')("span[class=\
+			            "actlprc\"]").text().strip('Rs.')
 		except AttributeError:
-			attrs['Bookadda'] = d.get('Bookadda')("span[class=
-					\"actlprc\"]").text()
+			attrs['Bookadda'] = d.get('Bookadda')("span[class=\
+			                "actlprc\"]").text()
 
 	else:
 		attrs['Bookadda'] = 'None'
@@ -102,18 +103,23 @@ def get_review(isbn):
 	
 	if (d.get('Rediffbook') != None):
 		try:
-			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=
-			\"proddetailinforight\"]").text().split()[2]
+			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\
+			            "proddetailinforight\"]").text().split()[2]
 		except (IndexError, AttributeError),e:
-			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=
-					\"proddetailinforight\"]").text()
+			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\
+			                "proddetailinforight\"]").text()
 	else:
 		attrs['Rediffbook'] = 'None'
 
 	# Insert Prices to review Collection 
 	Review.update({'_id':isbn},{'$set':{'Rediffbook':attrs['Rediffbook'],
-		'Rediffbook_url':attrs['Rediffbook_url'], 'Infibeam':attrs['Infibeam'],
-		'Infibeam_url':attrs['Infibeam_url'], 'Bookadda':attrs['Bookadda'],
-		'Bookadda_url':attrs['Bookadda_url'], 'Crossword':attrs['Crossword'],
-		'Crossword_url':attrs['Crossword_url'], 'Homeshop18':attrs['Homeshop18'],
-		'Homeshop18_url':attrs['Homeshop18_url'], 'date':attrs['date']}})
+		'Rediffbook_url':attrs['Rediffbook_url'], 
+		'Infibeam':attrs['Infibeam'],
+		'Infibeam_url':attrs['Infibeam_url'],
+		'Bookadda':attrs['Bookadda'],
+		'Bookadda_url':attrs['Bookadda_url'],
+		'Crossword':attrs['Crossword'],
+		'Crossword_url':attrs['Crossword_url'],
+		'Homeshop18':attrs['Homeshop18'],
+		'Homeshop18_url':attrs['Homeshop18_url'],
+		'date':attrs['date']}})

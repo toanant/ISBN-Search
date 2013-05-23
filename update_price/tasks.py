@@ -1,6 +1,6 @@
 ## This will update the review collection against the isbn.
 
-import requests # Request library for url fetching
+import requests      # Request library for url fetching
 from pyquery import PyQuery as pq 
 from lxml import etree
 import datetime
@@ -40,16 +40,16 @@ def update_review(isbn):
 ## Fetch price attribute for flipkart website
 	if (d.get('flipkart') != None):
 		fk = d.get('flipkart')
-		attrs["flipkart"] = fk("meta[itemprop=
-				\"price\"]").attr("content")
+		attrs["flipkart"] = fk("meta[itemprop=\
+		            "price\"]").attr("content")
 		try:
-			attrs["ratingValue"] = float(fk("meta[itemprop=
-				\"ratingValue\"]").attr("content"))
+			attrs["ratingValue"] = float(fk("meta[itemprop=\
+			            "ratingValue\"]").attr("content"))
 		except (TypeError, ValueError), e:
 			attrs["ratingValue"] = 'Not Rated'
 		try:
-			attrs["ratingCount"] = int(fk("span[itemprop=
-				\"ratingCount\"]").text())
+			attrs["ratingCount"] = int(fk("span[itemprop=\
+			            "ratingCount\"]").text())
 		except (TypeError, ValueError), e:
 			attrs["ratingCount"] = 'None'
 	
@@ -62,60 +62,63 @@ def update_review(isbn):
 ## Fetch price attribute for Infibeam website Price
 	if (d.get('Infibeam') != None):
 		Ib = d.get('Infibeam')
-		attrs['Infibeam'] = Ib("span[class=
-				\"infiPrice amount price\"]").text()
+		attrs['Infibeam'] = Ib("span[class=\
+		        "infiPrice amount price\"]").text()
 	else:
 		attrs['Infibeam'] = 'None'
 
 ## Fetch price attribute for Crossword website Price
 	if (d.get('Crossword') != None):
 		try:
-			attrs['Crossword'] = d.get('Crossword')("span[class=
-					\"variant-final-price\"]").text().strip('R')
+			attrs['Crossword'] = d.get('Crossword')("span[class=\
+			    "variant-final-price\"]").text().strip('R')
 		except AttributeError:
-			attrs['Crossword'] = d.get('Crossword')("span[class=
-					\"variant-final-price\"]").text()
+			attrs['Crossword'] = d.get('Crossword')("span[class=\
+			"variant-final-price\"]").text()
 	else:
 		attrs['Crossword']	= 'None'
 
 ## Fetch price attribute for Homeshop18 website Price
 	if (d.get('Homeshop18') != None):
 		try:
-			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=
-					\"hs18Price\"]").text().split()[1]
+			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\
+			            "hs18Price\"]").text().split()[1]
 		except AttributeError:
-			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=
-					\"hs18Price\"]").text()
+			attrs['Homeshop18'] = d.get('Homeshop18')("span[id=\
+			                "hs18Price\"]").text()
 	else:
 		attrs['Homeshop18'] = 'None'
 
 ## Fetch price attribute for Bookadda website Price
 	if (d.get('Bookadda') != None):
 		try:
-			attrs['Bookadda'] = d.get('Bookadda')("span[class=
-					\"actlprc\"]").text().strip('Rs.')
+			attrs['Bookadda'] = d.get('Bookadda')("span[class=\
+			            "actlprc\"]").text().strip('Rs.')
 		except AttributeError:
-			attrs['Bookadda'] = d.get('Bookadda')("span[class=
-					\"actlprc\"]").text()
+			attrs['Bookadda'] = d.get('Bookadda')("span[class=\
+			                "actlprc\"]").text()
 
 	else:
 		attrs['Bookadda'] = 'None'
 ##Fetch price attribute for rediff book website
 	if (d.get('Rediffbook') != None):
 		try:
-			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=
-					\"proddetailinforight\"]").text().split()[2]
+			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\
+			            "proddetailinforight\"]").text().split()[2]
 		except (IndexError, AttributeError), e:
-			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=
-					\"proddetailinforight\"]").text()
-	else:
+			attrs['Rediffbook'] = d.get('Rediffbook')("div[class=\
+			                "proddetailinforight\"]").text()
+	else:   
 		attrs['Rediffbook'] = 'None'
 
 	# Update the review Collection Object's price for particular isbn 
-	Review.update({'_id': isbn}, {'$set': {'Rediffbook': attrs['Rediffbook'],
-		'Infibeam': attrs['Infibeam'], 'Bookadda': attrs['Bookadda'],
-		'Crossword': attrs['Crossword'], 'Homeshop18':attrs['Homeshop18'],
-		 'date': attrs['date'], 'ratingCount': attrs.get('ratingCount'),
-		 'ratingValue': attrs.get('ratingValue')}})
-
+	Review.update({'_id': isbn}, 
+	        {'$set': {'Rediffbook': attrs['Rediffbook'],
+		    'Infibeam': attrs['Infibeam'],
+		    'Bookadda': attrs['Bookadda'],
+		    'Crossword': attrs['Crossword'],
+		    'Homeshop18':attrs['Homeshop18'],
+		    'date': attrs['date'],
+		    'ratingCount': attrs.get('ratingCount'),
+		    'ratingValue': attrs.get('ratingValue')}})
 

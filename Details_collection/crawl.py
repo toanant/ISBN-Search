@@ -9,7 +9,8 @@ MongoDB.
 from tasks import *
 
 def crawl():
-	isbn =  ISBN.find({'isbn_13':{'$exists':1}},{'_id':0})
+	isbn =  ISBN.find({'isbn_13':{'$exists':1}},
+			{'_id':0})
 	for e in isbn:
 		for h in e.values():
 			for t in h:

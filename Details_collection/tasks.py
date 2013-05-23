@@ -1,7 +1,7 @@
 '''
-This module collect details & price of book from flipkart website 
-against the isbn using celery worker task assigned by RabbitMQ 
-broker.
+This module collect details & price of book from
+flipkart website against the isbn using celery worker
+task assigned by RabbitMQ broker.
 '''
 from pymongo import MongoClient
 import requests
@@ -11,7 +11,8 @@ from pyquery import PyQuery as pq
 from lxml import etree
 from celery import Celery
 
-celery = Celery("tasks", broker="amqp://guest@localhost")
+celery = Celery("tasks", 
+            broker="amqp://guest@localhost")
 
 # mongodb connection with db as abhi
 connection = MongoClient()
@@ -30,35 +31,34 @@ def get_detail(val):
 	fk = {}
 	base_url = 'http://www.flipkart.com/search.php?query='
 	url = base_url + val
-##view_text_url = 'http://viewtext.org/api/text?url=%s&format=json'%(url)
 	r = requests.get(url, proxies=proxy)
 	if r.status_code == 200:
-       ## vt = request.get(view_text_url)
-
-		d = pq(r.text)
+        d = pq(r.text)
 		summary =  d('div[id="description"]').html()
 		if(summary != None):
 			attrs['summary'] = summary
 		else:
 			attrs['summary'] = None
-		fk["flipkart"] = d("meta[itemprop=
-					\"price\"]").attr("content")
+		fk["flipkart"] = d("meta[itemprop=\
+		            "price\"]").attr("content")
 		try:
-			fk["ratingValue"] = float(d("meta[itemprop=
-				\"ratingValue\"]").attr("content"))
+			fk["ratingValue"] = float(d("meta[itemprop=\
+			        "ratingValue\"]").attr("content"))
 		except (TypeError, ValueError), e:
 			fk["ratingValue"] = 'Not Rated'
 		try:
-			fk["ratingCount"] = int(d("span[itemprop=
-					\"ratingCount\"]").text())
+			fk["ratingCount"] = int(d("span[itemprop=\
+			            "ratingCount\"]").text())
 		except (TypeError, ValueError), e:
 			fk["ratingCount"] = 'None'
 		fk['_id'] = val
 		fk['flipkart_url'] = url
 		if(d("#mprodimg-id").find("img").attr("data-src") != None):
-			attrs['image'] = d("#mprodimg-id").find("img").attr("data-src")
+			attrs['image'] = d("#mprodimg-id").find("img") \
+					.attr("data-src")
 		else:
-			attrs['image'] = d('.image-wrapper > img').attr('src')
+			attrs['image'] = d('.image-wrapper > img')\
+					.attr('src')
 
 		attrs["name"] = d("h1[itemprop=
 					\"name\"]").attr("title")
@@ -66,7 +66,8 @@ def get_detail(val):
 			attrs["author"] = d(".secondary-info > a").text()
 		else:
 			try:
-				attrs['author'] = d('.secondary-info').text().split('Publisher')[0].split(':')[1]
+				attrs['author'] = d('.secondary-info').text()\
+						.split('Publisher')[0].split(':')[1]
 			except (IndexError, AttributeError), e:
 				attrs['author'] = 'None'
 		attrs["keywords"] =  d("meta[name=

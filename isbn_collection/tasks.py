@@ -1,8 +1,8 @@
 '''
 This Module will crawl flipkart website and get
 json output containing isbn for different category.
-Start this by running celery task worker in the activated
-virtualenvironment.
+Start this by running celery task worker in the 
+activated virtualenvironment.
 '''
 import requests
 from pyquery import PyQuery as pq
@@ -15,7 +15,8 @@ from pymongo import MongoClient
 
 #from pyelasticsearch import ElasticSearch
 
-celery = Celery("tasks", broker="amqp://guest@localhost")
+celery = Celery("tasks", 
+            broker="amqp://guest@localhost")
 
 # connect to mongodb database
 connection = MongoClient()
@@ -29,7 +30,8 @@ def get_isbn(category):
 	start = 0
 	while(True):
 		# category and start get json for that page on flipkart
-		url = 'http://www.flipkart.com/%s?response-type=json&inf-start=%d'%(category,start)
+		url='http://www.flipkart.com/%s?response-type=json&inf-start=%d'\
+				%(category,start)
 		r = requests.get(url)
 		if r.status_code == 200:
 			json= r.json()

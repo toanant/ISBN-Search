@@ -53,9 +53,10 @@ def clean_val(cursor):
     author = author.replace('[', '')
     author = author.replace('(', '')
     author = author.replace(')', '')
-    #return sorted(price.iteritems(), key=operator.itemgetter(1))
-    detail.update({'_id': isbn}, {'$set': {'Publication Year': year,
-	    'Publisher': publisher, 'name': name, 'author': author }})
+    detail.update({'_id': isbn},
+        {'$set': {'Publication Year': year,
+	    'Publisher': publisher, 
+	    'name': name, 'author': author }})
 
 def update_val():
 

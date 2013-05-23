@@ -1,11 +1,11 @@
 """
-This Script Recommend the similar Books based on the implemented
-algorithm. Algorithm takes cluster of books based on the Nouns 
-present in the Book's name with same category & subcategory and
-calculate the Euclidian distance on the three parameters -
-RatingCount, RatingValue & Average Price of Books.
-After that top 4 nearest neighbours Books are selected 
-and recommended to users.
+This Script Recommend the similar Books based on
+the implemented algorithm. Algorithm takes cluster of
+books based on the Nouns present in the Book's name with
+same category & subcategory and calculate the Euclidian 
+distance on the three parameters -RatingCount, RatingValue
+& Average Price of Books.After that top 4 nearest neighbours
+Books are selected and recommended to users.
 """
 
 from pymongo import MongoClient
@@ -41,10 +41,10 @@ def suggest_book(book, review):
     cat  =  book.get('category')
     sub_cat = book.get('sub_category')
     if cat:
-        cluster = abhi.command("text","Details", search=name,
-			filter={'category':cat,
-				'sub_category':sub_cat},
-			project={"_id": 1})
+        cluster = abhi.command("text","Details",
+             search=name,filter={'category':cat,
+		     'sub_category':sub_cat},
+			  project={"_id": 1})
     else:
         cluster = abhi.command("text","Details",
 			search=name,

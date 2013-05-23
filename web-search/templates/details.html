@@ -84,7 +84,8 @@
 			  <div>
 			  {% for e in prices %} 
 			  <tr itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-				  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">	Price on 
+				  <th itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+				  	Price on 
 					  <span itemprop="name"> 
 						  {% set a = e[0] %}
 						  {{ a }}
@@ -103,7 +104,9 @@
 	{% endfor %}
 </div>
 <tr>
-  <th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Rating On Flipkart:</th>
+  <th itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    Rating On Flipkart:
+  </th>
   <td itemprop="ratingValue">
     {{ review.get('ratingValue') }} 
     <i class="icon-star"> </i>
@@ -195,9 +198,10 @@
   </div>
 </div>
 <div class="span2">
-  <img itemprop="image" src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid"><br />
+  <img itemprop="image" src="{{ book.get('image')}}" alt="No Image preview available" class="img-polaroid">
+  <br />
   <script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
- <script>GBS_setLanguage('en');</script>
+  <script>GBS_setLanguage('en');</script>
   <script type="text/javascript">
     GBS_insertPreviewButtonPopup('ISBN:{{book.get('ISBN-10')}}');
   </script>

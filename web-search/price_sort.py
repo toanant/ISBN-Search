@@ -1,6 +1,6 @@
-""" take the input as a json doc from Review collection or 
-simply a result of find_one operation to sort the prices in
-increasing order
+""" take the input as a json doc from Review
+collection or simply a result of find_one operation
+to sort the prices in increasing order.
 """
 import re
 import operator

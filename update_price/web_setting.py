@@ -1,6 +1,7 @@
 '''
-This urlset contains website:search pattern in dictionary accordingly 
-for website to update prices against the url to book pages
+This urlset contains website:search pattern in 
+dictionary accordingly for website to update prices 
+against the url to book pages
 '''
 
 urlset = {'flipkart':'http://www.flipkart.com/search.php?query=',
