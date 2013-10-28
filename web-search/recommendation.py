@@ -2,7 +2,7 @@
 This Script Recommend the similar Books based on
 the implemented algorithm. Algorithm takes cluster of
 books based on the Nouns present in the Book's name with
-same category & subcategory and calculate the Euclidian 
+same category & subcategory and calculate the Euclidian
 distance on the three parameters -RatingCount, RatingValue
 & Average Price of Books.After that top 4 nearest neighbours
 Books are selected and recommended to users.
@@ -41,12 +41,11 @@ def suggest_book(book, review):
     cat  =  book.get('category')
     sub_cat = book.get('sub_category')
     if cat:
-        cluster = abhi.command("text","Details",
-             search=name,filter={'category':cat,
-		     'sub_category':sub_cat},
-			  project={"_id": 1})
+        cluster = abhi.command("text", "Details",
+             search=name,filter={'category':cat, 'sub_category':sub_cat},
+                               project={"_id": 1})
     else:
-        cluster = abhi.command("text","Details",
+        cluster = abhi.command("text", "Details",
 			search=name,
 			project={"_id": 1})
     cluster = cluster.get('results')
@@ -54,20 +53,17 @@ def suggest_book(book, review):
     for e in cluster:
         isbn = e.get('obj').get('_id')
         if isbn != o_isbn:
-            res = price.find_one({'_id': isbn},
-			    {'avg_price': 1, 'ratingCount': 1,
-		    'ratingValue': 1})
+            res = price.find_one({'_id': isbn}, {'avg_price': 1,
+                'ratingCount': 1, 'ratingValue': 1})
             n_ap = int(res.get('avg_price'))
             n_rv = int(res.get('ratingValue'))
             n_rc = int(res.get('ratingCount'))
-            distance = math.sqrt( (( o_ap - n_ap ) ** 2) + 
-			    ( (o_rc - n_rc) ** 2) +
-			    ( (o_rv - n_rv) ** 2 ))
+            distance = math.sqrt( (( o_ap - n_ap ) ** 2) +
+                    ( (o_rc - n_rc) ** 2) + ( (o_rv - n_rv) ** 2 ))
             norm_dist =  1 / (1+ distance)
             cluster_dict[isbn] = norm_dist
 
-    result = sorted(cluster_dict.iteritems(), 
-		    key=operator.itemgetter(1))
+    result = sorted(cluster_dict.iteritems(), key=operator.itemgetter(1))
     result.reverse()
     result = result[0:4]
     for e in result:

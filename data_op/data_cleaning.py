@@ -1,6 +1,6 @@
 '''
-This module take the input as a json from mongoDB or 
-simply a result of find_one operation and clean the 
+This module take the input as a json from mongoDB or
+simply a result of find_one operation and clean the
 content from unwanted symbols, strings and encode
 them into utf-8 and update into database.
 '''
@@ -54,9 +54,8 @@ def clean_val(cursor):
     author = author.replace('(', '')
     author = author.replace(')', '')
     detail.update({'_id': isbn},
-        {'$set': {'Publication Year': year,
-	    'Publisher': publisher, 
-	    'name': name, 'author': author }})
+        {'$set': {'Publication Year': year, 'Publisher': publisher,
+                  'name': name, 'author': author }})
 
 def update_val():
 
@@ -64,5 +63,6 @@ def update_val():
     for e in cursor:
         clean_val(e)
 
-update_val()
+if __name__ == '__main__':
+    update_val()
 

@@ -1,6 +1,6 @@
 '''
-This urlset contains website:search pattern in 
-dictionary accordingly for website to update prices 
+This urlset contains website:search pattern in
+dictionary accordingly for website to update prices
 against the url to book pages
 '''
 

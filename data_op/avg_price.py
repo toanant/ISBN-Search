@@ -1,6 +1,6 @@
 '''
 This module take the input as a json from mongoDB or
-simply a result of find_one operation and calculate 
+simply a result of find_one operation and calculate
 the average price of the book to be used during the
 implementation of recommendation algorithm.
 '''
@@ -39,8 +39,7 @@ def avg_val(cursor):
         average.append(int(e))
     if len(average) > 0:
         average = (min(average) + max(average)) // 2
-    review.update({'_id': isbn},
-		    {'$set': {'avg_price': average }})
+    review.update({'_id': isbn}, {'$set': {'avg_price': average }})
 
 def insert_val():
 
@@ -48,5 +47,6 @@ def insert_val():
     for e in cursor:
         avg_val(e)
 
-insert_val()
+if __name__ == '__main__':
+    insert_val()
 

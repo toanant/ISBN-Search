@@ -7,8 +7,8 @@ import operator
 
 #cursor as a find_one query over Review collection against isbn
 def sort_prices(cursor):
-    web_list = ['Bookadda', 'Crossword', 'Homeshop18',
-		    'Infibeam', 'Rediffbook', 'flipkart']
+    web_list = ['Bookadda', 'Crossword', 'Homeshop18', 'Infibeam',
+                'Rediffbook', 'flipkart']
     price =  {}
 
     for site in web_list:
@@ -28,8 +28,5 @@ def sort_prices(cursor):
         if p.search(v):
             price[k] = int(p.search(v).group())
 
-    # return sorted price in a tuple-dictionary 
-    return sorted(price.iteritems(),
-		    key=operator.itemgetter(1))
-
-
+    # return sorted price in a tuple-dictionary
+    return sorted(price.iteritems(), key=operator.itemgetter(1))
