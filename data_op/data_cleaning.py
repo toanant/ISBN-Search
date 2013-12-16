@@ -8,9 +8,9 @@ import re
 #import operator
 from pymongo import MongoClient
 con = MongoClient()
-abhi = con.abhi
-review = abhi.Review
-detail  = abhi.Details
+dbname = con.dbname
+review = dbname.Review
+detail  = dbname.Details
 
 def clean_val(cursor):
     isbn =  cursor.get('_id')

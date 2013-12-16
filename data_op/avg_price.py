@@ -7,8 +7,8 @@ implementation of recommendation algorithm.
 import re
 from pymongo import MongoClient
 con = MongoClient()
-abhi = con.abhi
-review = abhi.Review
+dbname = con.dbname
+review = dbname.Review
 
 
 def avg_val(cursor):

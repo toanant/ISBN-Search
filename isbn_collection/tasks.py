@@ -17,7 +17,7 @@ celery = Celery("tasks", broker="amqp://guest@localhost")
 
 # connect to mongodb database
 connection = MongoClient()
-db = connection.abhi
+db = connection.dbname
 # ISBN define isbn collection in a list associated with category
 ISBN = db.ISBN
 

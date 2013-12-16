@@ -14,7 +14,7 @@ celery = Celery("tasks", broker="amqp://guest@localhost")
 
 # connect to mongodb database
 connection = MongoClient()
-db = connection.abhi
+db = connection.dbname
 Review = db.Review
 
 # Initialization of celery task to update price

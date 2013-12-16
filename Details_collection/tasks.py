@@ -12,9 +12,9 @@ from celery import Celery
 
 celery = Celery("tasks", broker="amqp://guest@localhost")
 
-# mongodb connection with db as abhi
+# mongodb connection with db as dbname
 connection = MongoClient()
-db = connection.abhi
+db = connection.dbname
 ISBN = db.ISBN
 Details = db.Details
 Review = db.Review

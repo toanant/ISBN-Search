@@ -15,10 +15,10 @@ import operator
 
 
 con = MongoClient()
-abhi = con.abhi
-detail = abhi.Details
-price = abhi.Review
-ignore = abhi.ignore
+dbname = con.dbname
+detail = dbname.Details
+price = dbname.Review
+ignore = dbname.ignore
 
 def suggest_book(book, review):
     cluster_dict = {}
@@ -41,11 +41,11 @@ def suggest_book(book, review):
     cat  =  book.get('category')
     sub_cat = book.get('sub_category')
     if cat:
-        cluster = abhi.command("text", "Details",
+        cluster = dbname.command("text", "Details",
              search=name,filter={'category':cat, 'sub_category':sub_cat},
                                project={"_id": 1})
     else:
-        cluster = abhi.command("text", "Details",
+        cluster = dbname.command("text", "Details",
 			search=name,
 			project={"_id": 1})
     cluster = cluster.get('results')

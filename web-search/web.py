@@ -28,7 +28,7 @@ from recommendation import suggest_book
 
 # connect to mongodb database
 connection = MongoClient()
-db = connection.abhi
+db = connection.dbname
 
 # defining Flask application here
 app = Flask(__name__)

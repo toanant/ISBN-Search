@@ -1,7 +1,7 @@
 '''
 This Module Collect prices from different website
 by running celery task worker and store them into
-Review collection of abhi databse with timestamp
+Review collection of dbname databse with timestamp
 when price is crawled.
 '''
 import re
@@ -19,7 +19,7 @@ celery = Celery("tasks",
 
 # connect to mongodb database
 connection = MongoClient()
-db = connection.abhi
+db = connection.dbname
 Review = db.Review
 
 # Celery task Implementation for price crawl
